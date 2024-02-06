@@ -164,10 +164,13 @@ class UserController extends Controller
      * complete User Profile
      *
      */
-    public function createUserData(CreateUserRequest $request)
+    public function createOrUpdateUserData(CreateUserRequest $request)
     {
-        $userId = auth('sanctum')->id();
-        $user = $this->userService->createUserData($userId, $request);
+        $user = auth('sanctum')->user();
+        if($user['status'] != 0){
+            return $this->errorResponse($user, 'you cant edit anymore');
+        }
+        $user = $this->userService->createOrUpdateUserData($user, $request);
         return $this->successJsonResponse($user);
     }
 
@@ -177,10 +180,10 @@ class UserController extends Controller
      * update the specified user 
      *
      */
-    public function updateUserData(UpdateUserRequest $request)
+    public function updateUserBio(UpdateUserRequest $request)
     {
         $userId = auth('sanctum')->id();
-        $user = $this->userService->updateUserData($userId, $request);
+        $user = $this->userService->createOrUpdateUserData($userId, $request);
         return $this->successJsonResponse($user);
     }
 

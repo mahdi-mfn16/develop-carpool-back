@@ -22,60 +22,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 
 
-    public function getHomeUsers($gender, $page, $limit)
-    {
-        return $this->model->where('users.gender', $gender)
-        ->join('cities', 'users.city_id', '=', 'cities.id')
-        ->join('provinces', 'users.province_id', '=', 'provinces.id')
-        
-        ->selectRaw("
-        users.*,
-        cities.name as city_name,
-        provinces.name as province_name,
-        ")
-        ->orderBy('users.id', 'asc')
-        ->paginate($limit);
-    }
-
-
-    public function searchUsers($gender, $filters)
-    {
- 
-        $users =  $this->model->where('users.gender', $gender);
-
-        if($filters['province_id']){
-            $users = $users->where('users.province_id', $filters['province_id']);
-        }
-        if($filters['city_id']){
-            $users = $users->where('users.city_id', $filters['city_id']);
-        }
-        if($filters['min_age']){
-            $users = $users->where('users.age', '>=', $filters['min_age']);
-        }
-        if($filters['max_age']){
-            $users = $users->where('users.age', '<=', $filters['max_age']);
-        }
-        // if($filters['has_profile']){
-            // $users = $users->whereH('users.age', '<=', $filters['max_age']);
-        // }
-        if($filters['is_online']){
-            $users = $users->where('users.is_online',  $filters['is_online']);
-        }
-        
-        $users = $users->join('cities', 'users.city_id', '=', 'cities.id')
-        ->join('provinces', 'users.province_id', '=', 'provinces.id')
-
-        ->selectRaw("
-        users.*,
-        cities.name as city_name,
-        provinces.name as province_name
-        ")
-        ->orderBy('users.id', 'asc')
-        ->get();
-
-        return $users;
-    }
-
 
     public function registerUser($mobile)
     {
@@ -117,23 +63,21 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 
 
-    public function createUserData($userId, $request)
+    public function createOrUpdateUserData($user, $request)
     {
         
-        return $this->model->where('id', $userId)->update([
-            'first_name' => isset($request['first_name']) ? $request['first_name'] : null,
-            'last_name' => isset($request['last_name']) ? $request['last_name'] : null,            
-            'about_me' => null,
-            'user_name' => Helper::generateUserName(),
-            // 'password' => bcrypt($request['password']),
-            // 'birth_day' => isset($request['birth_day']) ? $request['birth_day'] : null,  
-            'province_id' => $request['province_id'],
-            'city_id' => $request['city_id'],
-            'age' => $request['age'],
-            'gender' => $request['gender'],            
+        $user->update([
+            'name' => isset($request['name']) ? $request['name'] : $user['name'],
+            'family' => isset($request['family']) ? $request['family'] : $user['family'],            
+            'birth_day' => isset($request['birth_day']) ? $request['birth_day'] : $user['birth_day'],  
+            'gender' => isset($request['gender']) ? $request['gender'] : $user['gender'],  
+            'national_code' => isset($request['national_code']) ? $request['national_code'] : $user['national_code'],  
+            'about_me' => null,    
+            'privilege' => 0, 
+            'status' => 0,    
         ]);
-
-        // about_me update table ???  $request['about_me']
+        
+        return $this->model->where('id', $user['id'])->first();
     }
 
 

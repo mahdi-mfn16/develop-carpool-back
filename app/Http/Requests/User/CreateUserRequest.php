@@ -24,16 +24,11 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string',
-            'last_name' => 'nullable|string',
-            // 'user_name' => 'nullable|string',
-            'password' => 'required|string',
-            'birth_day' => 'nullable|date_format:Y-m-d',
-            'province_id' => 'required|int|exists:provinces,id',
-            'city_id' => 'required|int|exists:cities,id',
-            'age' => 'required|int|min:7',
+            'name' => 'required|string|min:3',
+            'family' => 'required|string|min:3',
+            'birth_day' => 'required|date_format:Y-m-d',
             'gender' => 'required|int|in:0,1,2',
-            'about_me' => 'nullable|string|max:256',
+            'national_code' => 'required|string|min:10|max:10',
         ];
     }
 }

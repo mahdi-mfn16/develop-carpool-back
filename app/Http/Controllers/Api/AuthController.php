@@ -84,8 +84,8 @@ class AuthController extends Controller
 
         $user = $this->userService->registerUser($request['mobile']);
         
-        $token = $user->createToken('authToken')->plainTextToken;
-        return $this->successJsonResponse(['user' => $user, 'token'=>$token]);
+        // $token = $user->createToken('authToken')->plainTextToken;
+        // return $this->successJsonResponse(['user' => $user, 'token'=>$token]);
 
         return $this->successJsonResponse();
     }

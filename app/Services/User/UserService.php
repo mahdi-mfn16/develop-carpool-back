@@ -88,11 +88,9 @@ class UserService extends BaseService
     }
 
 
-    public function createUserData($userId, $request)
+    public function createOrUpdateUserData($user, $request)
     {
-        // $this->userTempRepo->createUserData($userId, $request);
-        return $this->repository->createUserData($userId, $request);
-        
+        return $this->repository->createOrUpdateUserData($user, $request);   
     }
 
 
