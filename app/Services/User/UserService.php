@@ -53,14 +53,12 @@ class UserService extends BaseService
 
     public function registerUser($mobile)
     {
-        // $isMobileUnique = $this->repository->isMobileUnique($mobile);
-        // if(! $isMobileUnique){
-        //     return false;
-        // }
         $user = $this->repository->registerUser($mobile);
 
         $code = Helper::generateSmsCode();
         SmsSender::sendSms($mobile, $code, 'register_user');
+        
+        $this->repository->updateUserCode($mobile, $code);
 
         return $user;
     }

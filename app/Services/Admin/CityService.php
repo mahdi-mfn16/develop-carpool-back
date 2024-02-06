@@ -15,9 +15,11 @@ class CityService extends BaseService
     }
 
 
-    public function getCities($provinceId = null)
+    public function getCities($request)
     {
-        $this->repository->getCities($provinceId);
+        $filters = $request->input('filters');
+        $limit = $request->input('limit');
+        return $this->repository->getCities($filters, $limit);
     }
 
     

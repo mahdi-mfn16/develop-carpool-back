@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\City\IndexCityRequest;
+use App\Http\Resources\City\CityCollection;
 use App\Http\Resources\City\CityResource;
 use App\Services\Admin\CityService;
 
@@ -38,11 +39,35 @@ class CityController extends Controller
      *      description="get list of cities of province",
      *      security={{"bearer":{}}},
      *      @OA\Parameter(
-     *         name="province_id",
-     *         description="province_id",
+     *         name="page",
+     *         description="page",
      *         in = "query",
      *         @OA\Schema(type="integer") 
      *       ),
+     *      @OA\Parameter(
+     *         name="limit",
+     *         description="limit",
+     *         in = "query",
+     *         @OA\Schema(type="integer") 
+     *       ),
+     *      @OA\Parameter(
+    *         name="filters[province_id]",
+    *         in="query",
+    *         description="province_id",
+    *         @OA\Schema(
+    *             type="integer",
+    *             example="1"
+    *         )
+    *     ),
+    *       @OA\Parameter(
+    *         name="filters[search]",
+    *         in="query",
+    *         description="search",
+    *         @OA\Schema(
+    *             type="string",
+    *             example=""
+    *         )
+    *     ),
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",
@@ -60,8 +85,8 @@ class CityController extends Controller
      */
     public function index(IndexCityRequest $request)
     {
-        $cities = $this->cityService->getCities($request['province_id']);
-        return $this->successArrayResponse(CityResource::collection($cities));
+        $cities = $this->cityService->getCities($request);
+        return $this->successPaginateResponse(new CityCollection($cities));
     }
 
 

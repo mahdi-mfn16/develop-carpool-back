@@ -19,15 +19,17 @@ class CityRepository extends BaseRepository implements CityRepositoryInterface
     }
 
 
-    public function getCities($provinceId = null)
+    public function getCities($filters, $limit = 10)
     {
         $cities = $this->model->query();
-
+        $search = isset($filters['search']) ? $filters['search'] : '';
+        $provinceId = (isset($filters['province_id']) && $filters['province_id']) ? $filters['province_id'] : null;
         if($provinceId){
             $cities = $cities->where('province_id', $provinceId);
         }
 
-        $cities = $cities->get();
+        $cities = $cities->where('name', 'like', '%'.$search.'%')
+        ->with(['province'])->paginate($limit);
 
         return $cities;
     }

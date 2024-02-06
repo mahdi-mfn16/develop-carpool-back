@@ -251,11 +251,37 @@
                 "operationId": "getCities",
                 "parameters": [
                     {
-                        "name": "province_id",
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filters[province_id]",
                         "in": "query",
                         "description": "province_id",
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "filters[search]",
+                        "in": "query",
+                        "description": "search",
+                        "schema": {
+                            "type": "string",
+                            "example": ""
                         }
                     }
                 ],

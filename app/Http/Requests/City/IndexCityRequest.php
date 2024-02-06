@@ -13,7 +13,7 @@ class IndexCityRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class IndexCityRequest extends FormRequest
     public function rules()
     {
         return [
-            'province_id' => 'nullable|numeric|exists:provinces,id'
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
+            'filters' => 'sometimes|array',
+            'filters.province' => 'sometimes|nullable|numeric|exists:provinces,id',
+            'filters.search' => 'sometimes|nullable|string',
         ];
     }
 }

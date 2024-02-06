@@ -70,7 +70,7 @@ class RideController extends Controller
     public function getMyRides(RideMyIndexRequest $request)
     {
         $rides = $this->rideService->getMyRides($request);
-        return $this->successArrayResponse(new RideCollection($rides));
+        return $this->successPaginateResponse(new RideCollection($rides));
     }
 
 
@@ -165,7 +165,7 @@ class RideController extends Controller
     public function getAllRides(RideIndexRequest $request)
     {
         $rides = $this->rideService->getAllRides($request);
-        return $this->successArrayResponse(new RideCollection($rides));
+        return $this->successPaginateResponse(new RideCollection($rides));
     }
 
 
