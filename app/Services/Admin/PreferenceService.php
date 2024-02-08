@@ -15,5 +15,19 @@ class PreferenceService extends BaseService
     }
 
 
+    public function updateUserPreference($user, $preference, $request)
+    {
+        $preferenceOptionId = $request->input('preference_option_id');
+        $allOptionIds = $preference->options->pluck('id');
+        $user->preferenceOptions()->detach($allOptionIds);
+
+        if($preferenceOptionId){
+            $user->preferenceOptions()->sync($preferenceOptionId);
+        }
+
+        return true;
+    }
+
+
 
 }

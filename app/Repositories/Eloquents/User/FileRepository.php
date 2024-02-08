@@ -22,51 +22,24 @@ class FileRepository extends BaseRepository implements FileRepositoryInterface
 
 
 
-    public function getUserImageProfile($userId)
-    {
-        return $this->model
-        ->where('user_id', $userId)
-        ->where('confirmed', 1)
-        ->where('is_profile', 1)
-        ->first();
-    }
-
-
-
-    public function uploadImage($userId, $data, $directory='images', $type = 'profile')
+    public function uploadImage($userId, $data, $filableModel, $directory='images', $type = 'profile')
     {
         // upload on storage
-        $hasProfile = $this->getUserImageProfile($userId);
-        $image = $this->uploadFile($userId, $data['image'], $directory, $type);
+        $image = $this->uploadFile($userId, $data, $directory, $type);
 
 
         return $this->model->create([
             'user_id' => $userId,
             'name' => $image['name'],
-            'url' => $image['url'],
-            'is_profile' => $hasProfile ? 0 : 1,
-            'confirmed' => 0
+            'path' => $image['path'],
+            'type' => $type,
+            'filable_id' => $filableModel['id'],
+            'filable_type' => get_class($filableModel),
+            'status' => 0
 
         ]);
     }
 
-
-
-    public function updateMainProfileImage($userId, $imageId)
-    {
-        $this->model->where('user_id', $userId)
-        ->where('is_profile', 1)->update([
-            'is_profile' => 0
-        ]);
-
-        $this->model->where('id', $imageId)
-        ->where('user_id', $userId)->update([
-            'is_profile' => 1
-        ]);
-
-        return $this->model->where('user_id', $userId)->get();
-        
-    }
 
 
 
@@ -80,13 +53,13 @@ class FileRepository extends BaseRepository implements FileRepositoryInterface
         
         Storage::put($path, file_get_contents($file));
 
-        return ['name' => $name, 'url' => $path];
+        return ['name' => $name, 'path' => $path];
     }
 
 
     public function deleteImage($image)
     {
-        Storage::delete($image['url']);
+        Storage::delete($image['path']);
         return $image->delete();
     }
 

@@ -22,7 +22,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller('UserController')->prefix('users')->group(function(){
         Route::get('user-info', 'getUserInfo');
         Route::get('/profile/{user}', 'getUserProfile');
-        Route::post('/create', 'createUserData');
+        Route::post('/complete-profile', 'createOrUpdateUserData');
+        Route::put('/update-bio', 'updateUserBio');
+        Route::post('/upload-file', 'uploadUserFile');
+        Route::put('/update-preference/{preference}', 'updateUserPreference');
+
+        
     });
 
 
@@ -111,6 +116,12 @@ Route::middleware([])->group(function () {
 // ----------------- Ride Route ------------------------
     Route::controller('RideController')->prefix('rides')->group(function(){
         Route::get('/', 'getAllRides');
+        
+    });
+
+// ----------------- Vehicle Route ------------------------
+    Route::controller('VehicleController')->prefix('vehicles')->group(function(){
+        Route::get('/', 'getVehicles');
         
     });
     

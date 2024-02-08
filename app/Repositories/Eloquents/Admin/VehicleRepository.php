@@ -16,7 +16,20 @@ class VehicleRepository extends BaseRepository implements VehicleRepositoryInter
 
     public function load()
     {
-        
+        return [];
+    }
+
+
+
+    public function getVehicles($filters, $limit = 10)
+    {
+        $vehicles = $this->model->query();
+        $search = isset($filters['search']) ? $filters['search'] : '';
+
+        $vehicles = $vehicles->where('name', 'like', '%'.$search.'%')
+        ->paginate($limit);
+
+        return $vehicles;
     }
 
 

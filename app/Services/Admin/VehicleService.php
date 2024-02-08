@@ -16,4 +16,13 @@ class VehicleService extends BaseService
 
 
 
+    public function getVehicles($request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit');
+        return $this->repository->getVehicles($filters, $limit);
+    }
+
+
+
 }

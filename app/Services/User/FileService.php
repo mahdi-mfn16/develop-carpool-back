@@ -29,9 +29,9 @@ class FileService extends BaseService
     }
 
 
-    public function uploadImage($userId, $data, $directory, $type)
+    public function uploadImage($userId, $data, $filableModel, $directory, $type)
     {
-        return $this->repository->uploadImage($userId, $data, $directory, $type);
+        return $this->repository->uploadImage($userId, $data, $filableModel, $directory, $type);
     }
 
 

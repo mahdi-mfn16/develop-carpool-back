@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest
+class UploadUserFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|nullable|string|min:3',
-            'family' => 'sometimes|nullable|string|min:3',
-            'birth_day' => 'sometimes|nullable|date_format:Y-m-d',
-            'gender' => 'sometimes|nullable|int|in:0,1,2',
-            'national_code' => 'sometimes|nullable|string|min:10|max:10',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|size:2048|dimensions:min_width=200,min_height=200,max_width=1000,max_height=1000',
+            'type' => 'required|string|in:profile,drive_license_back,drive_license_front,vehicle_card_back,vehicle_card_front,selfie'
+
         ];
     }
 }

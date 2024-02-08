@@ -836,6 +836,284 @@
                     }
                 ]
             }
+        },
+        "/api/users/complete-profile": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "complete user profile",
+                "description": "complete user profile",
+                "operationId": "createOrUpdateUserData",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "example": "mehdi"
+                                    },
+                                    "family": {
+                                        "description": "family",
+                                        "example": "firoozi"
+                                    },
+                                    "birth_day": {
+                                        "description": "birth_day",
+                                        "example": "1995-12-12"
+                                    },
+                                    "gender": {
+                                        "description": "gender",
+                                        "example": "1"
+                                    },
+                                    "national_code": {
+                                        "description": "national_code",
+                                        "example": "2123134145"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/users/update-bio": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "update user bio",
+                "description": "update user bio",
+                "operationId": "updateUserBio",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "text": {
+                                        "description": "text",
+                                        "example": "test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/users/upload-file": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "upload user file",
+                "description": "upload user file",
+                "operationId": "uploadUserFile",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "image": {
+                                        "description": "image",
+                                        "type": "file",
+                                        "example": "test"
+                                    },
+                                    "type": {
+                                        "description": "type",
+                                        "example": "profile,drive_license_back,drive_license_front,vehicle_card_back,vehicle_card_front,selfie"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/users/update-preference/{preferenceId}": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "update user preference",
+                "description": "update user preference",
+                "operationId": "updateUserPreference",
+                "parameters": [
+                    {
+                        "name": "preferenceId",
+                        "in": "path",
+                        "description": "preference id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "preference_option_id": {
+                                        "description": "preference_option_id",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/vehicles": {
+            "get": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "get list of vehicles",
+                "description": "get list of vehicles",
+                "operationId": "getVehicles",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filters[search]",
+                        "in": "query",
+                        "description": "search",
+                        "schema": {
+                            "type": "string",
+                            "example": ""
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
         }
     },
     "tags": [

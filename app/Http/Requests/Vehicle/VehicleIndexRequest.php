@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Vehicle;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest
+class VehicleIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,10 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|nullable|string|min:3',
-            'family' => 'sometimes|nullable|string|min:3',
-            'birth_day' => 'sometimes|nullable|date_format:Y-m-d',
-            'gender' => 'sometimes|nullable|int|in:0,1,2',
-            'national_code' => 'sometimes|nullable|string|min:10|max:10',
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
+            'filters' => 'sometimes|array',
+            'filters.search' => 'sometimes|nullable|string',
         ];
     }
 }

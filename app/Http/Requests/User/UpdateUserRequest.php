@@ -13,7 +13,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,15 +24,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string',
-            'last_name' => 'nullable|string',
-            'user_name' => 'nullable|string',
-            'birth_day' => 'nullable|date_format:Y-m-d',
-            'province_id' => 'required|int|exists:provinces,id',
-            'city_id' => 'required|int|exists:cities,id',
-            'age' => 'required|int|min:7',
-            'gender' => 'required|int|in:0,1,2',
-            'about_me' => 'nullable|string|max:256',
+            'text' => 'required|string|min:1|max:256',
         ];
     }
 }

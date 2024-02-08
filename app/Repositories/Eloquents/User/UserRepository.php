@@ -17,7 +17,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function load()
     {
         return [
-            'profile'
+            'profile' => function($q) {
+                $q->where('status', 1);
+            },
+            'preferenceOptions' => function($q) {
+                $q->with(['preference']);
+            }
         ];
     }
 
@@ -68,7 +73,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function createOrUpdateUserData($user, $request)
     {
         
-        $user->update([
+        return $user->update([
             'name' => isset($request['name']) ? $request['name'] : $user['name'],
             'family' => isset($request['family']) ? $request['family'] : $user['family'],            
             'birth_day' => isset($request['birth_day']) ? $request['birth_day'] : $user['birth_day'],  
@@ -79,31 +84,21 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             'status' => 0,    
         ]);
         
-        return $this->model->where('id', $user['id'])->first();
     }
 
 
-
-    public function updateUserData($userId, $request)
+    public function updateUserBio($userId, $text)
     {
-        $this->model->where('id', $userId)->update(
-            
+        return $this->model->where('id', $userId)->update(
             [
-            'first_name' => isset($request['first_name']) ? $request['first_name'] : null,
-            'last_name' => isset($request['last_name']) ? $request['last_name'] : null,            
-
-            // 'birth_day' => isset($request['birth_day']) && !is_null($request['birth_day']) ? : $user['birth_day'],
-            'province_id' => $request['province_id'],
-            'city_id' => $request['city_id'],
-            'age' => $request['age'],
-        ]);
-
-        // about_me update table ???  $request['about_me']
-        
-        $user = $this->model->where('id', $userId)->first();
-
+                'bio_temp' => $text,
+                'bio_status' => 1,
+            ]
+        );
 
     }
+
+
 
 
 
