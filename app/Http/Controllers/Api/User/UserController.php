@@ -323,8 +323,9 @@ class UserController extends Controller
     public function uploadUserFile(UploadUserFileRequest $request)
     {
         $user = auth('sanctum')->user();
-        $image = $this->fileService->uploadImage($user['id'], $request->input('image'), $user, $directory='images', $request->input('type'));
+        $image = $this->fileService->uploadImage($user['id'], $request['image'], $user, $directory='images', $request->input('type'));
         $user = $this->userService->showItem($user['id']);
+
         return $this->successJsonResponse(UserResource::make($user));
     }
 

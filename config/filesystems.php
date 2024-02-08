@@ -70,4 +70,6 @@ return [
         public_path('storage') => storage_path('app/public'),
     ],
 
+    'public_root' => 'http://127.0.0.1:8000/storage/'
+
 ];

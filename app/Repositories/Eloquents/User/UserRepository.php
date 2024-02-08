@@ -17,9 +17,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function load()
     {
         return [
-            'profile' => function($q) {
-                $q->where('status', 1);
-            },
+            'files',
             'preferenceOptions' => function($q) {
                 $q->with(['preference']);
             },

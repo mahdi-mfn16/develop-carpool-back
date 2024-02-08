@@ -12,8 +12,6 @@ class UserResource extends JsonResource
    
     public function toArray($request)
     {
-        $profile = $this->whenLoaded('profile');
-        $profile = $profile->first();
 
         return [
             'id'=> $this->id,
@@ -26,7 +24,7 @@ class UserResource extends JsonResource
             'gender' => $this->gender,
             'about_me' => $this->about_me,
             'status' => $this->status,
-            'profile' => $profile ? FileResource::make($profile) : null,
+            'profile' => $this->getFileUrl('profile', true),
             'preferences' => PreferenceOptionResource::collection($this->whenLoaded('preferenceOptions')),
 
         ];

@@ -13,8 +13,6 @@ class MyUserResource extends JsonResource
    
     public function toArray($request)
     {
-        $profile = $this->whenLoaded('profile');
-        $profile =  $profile ? $profile->first() : null;
 
         return [
             'id'=> $this->id,
@@ -28,9 +26,9 @@ class MyUserResource extends JsonResource
             'about_me' => $this->bio_temp,
             'bio_status' => $this->bio_status,
             'status' => $this->status,
-            'profile' => $profile ? FileResource::make($profile) : null,
+            'profile' => $this->getFileUrl('profile', false),
             'preferences' => PreferenceOptionResource::collection($this->whenLoaded('preferenceOptions')),
-            'preferences' => UserVehicleResource::collection($this->whenLoaded('vehicles')),
+            'vehicles' => UserVehicleResource::collection($this->whenLoaded('vehicles')),
 
         ];
     }

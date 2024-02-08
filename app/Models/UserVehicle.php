@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\HasFile;
 use Illuminate\Database\Eloquent\Model;
 
 class UserVehicle extends Model
 {
+    use HasFile;
 
     protected $table = 'user_vehicles';
 

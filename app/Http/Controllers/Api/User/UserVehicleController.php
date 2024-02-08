@@ -254,7 +254,7 @@ class UserVehicleController extends Controller
     public function uploadVehicleFile(UploadUserVehicleFileRequest $request, UserVehicle $userVehicle)
     {
         $user = auth('sanctum')->user();
-        $image = $this->fileService->uploadImage($user['id'], $request->input('image'), $userVehicle, $directory='images', $request->input('type'));
+        $image = $this->fileService->uploadImage($user['id'], $request['image'], $userVehicle, $directory='images', $request->input('type'));
         $vehicle = $this->userVehicleService->showItem($user['id']);
         return $this->successJsonResponse(UserVehicleResource::make($user));
     }

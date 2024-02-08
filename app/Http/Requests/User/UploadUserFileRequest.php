@@ -24,7 +24,7 @@ class UploadUserFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|size:2048|dimensions:min_width=200,min_height=200,max_width=1000,max_height=1000',
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=200,min_height=200,max_width=1500,max_height=1500',
             'type' => 'required|string|in:profile,drive_license_back,drive_license_front,selfie'
 
         ];

@@ -5,6 +5,18 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Validation\ValidationException;
+use Laravel\Passport\Exceptions\OAuthServerException as ExceptionsOAuthServerException;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use Shetabit\Multipay\Exceptions\PurchaseFailedException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -34,8 +46,54 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        $this->reportable(function (Throwable $th) {
+            // info('test1111');
+            // if ($request->is('api/*')) {
+
+                if ($th instanceof ValidationException) {
+                    // info('test1111');
+                    return (new Controller())->errorResponse(
+                        [], 400, $th->getMessage()
+                    );
+                }
+
+                if ($th instanceof NotFoundHttpException) {
+                    $message = $th->getMessage();
+
+                    return (new Controller())->errorResponse(
+                        [], 404, $th->getMessage()
+                    );
+                }
+
+                if ($th instanceof ThrottleRequestsException) {
+                    return (new Controller())->errorResponse(
+                        [], 429, $th->getMessage()
+                    );
+                }
+
+
+                if ($th instanceof AuthenticationException) {
+                    return (new Controller())->errorResponse(
+                        [], 401, $th->getMessage()
+                    );
+                }
+
+                if ($th instanceof AccessDeniedHttpException) {
+                    return (new Controller())->errorResponse(
+                        [], 403, $th->getMessage()
+                    );
+                }
+
+
+
+                return (new Controller())->errorResponse(
+                    [], 500, $th->getMessage()
+                );
+            }
+
+        // }
+    );
     }
+      
+
 }

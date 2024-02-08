@@ -51,7 +51,7 @@ class FileRepository extends BaseRepository implements FileRepositoryInterface
 
         $path = $directory.'/'.$type.'/'.$name;
         
-        Storage::put($path, file_get_contents($file));
+        Storage::put('public/'.$path, file_get_contents($file));
 
         return ['name' => $name, 'path' => $path];
     }
