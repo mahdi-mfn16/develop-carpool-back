@@ -523,6 +523,38 @@
                 ]
             }
         },
+        "/api/preferences": {
+            "get": {
+                "tags": [
+                    "Preference"
+                ],
+                "summary": "get list of preferences",
+                "description": "get list of preferences",
+                "operationId": "getPreferences",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/provinces": {
             "get": {
                 "tags": [
@@ -967,7 +999,7 @@
                                     },
                                     "type": {
                                         "description": "type",
-                                        "example": "profile,drive_license_back,drive_license_front,vehicle_card_back,vehicle_card_front,selfie"
+                                        "example": "profile,drive_license_back,drive_license_front,selfie"
                                     }
                                 },
                                 "type": "object"
@@ -1025,6 +1057,236 @@
                                     "preference_option_id": {
                                         "description": "preference_option_id",
                                         "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/vehicles/user": {
+            "post": {
+                "tags": [
+                    "User Vehicle"
+                ],
+                "summary": "create user vehicle",
+                "description": "create user vehicle",
+                "operationId": "createUserVehicle",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "vehicle_id": {
+                                        "description": "vehicle_id",
+                                        "example": "1"
+                                    },
+                                    "plate_number": {
+                                        "description": "plate_number",
+                                        "example": "12k123r"
+                                    },
+                                    "color": {
+                                        "description": "color",
+                                        "example": "black"
+                                    },
+                                    "year_model": {
+                                        "description": "year_model",
+                                        "example": "2023"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/vehicles/user/{userVehicleId}": {
+            "put": {
+                "tags": [
+                    "User Vehicle"
+                ],
+                "summary": "update user vehicle",
+                "description": "update user vehicle",
+                "operationId": "updateUserVehicle",
+                "parameters": [
+                    {
+                        "name": "userVehicleId",
+                        "in": "path",
+                        "description": "user vehicle id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "vehicle_id": {
+                                        "description": "vehicle_id",
+                                        "example": "1"
+                                    },
+                                    "plate_number": {
+                                        "description": "plate_number",
+                                        "example": "12k123r"
+                                    },
+                                    "color": {
+                                        "description": "color",
+                                        "example": "black"
+                                    },
+                                    "year_model": {
+                                        "description": "year_model",
+                                        "example": "2023"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User Vehicle"
+                ],
+                "summary": "delete user vehicle",
+                "description": "delete user vehicle",
+                "operationId": "deleteUserVehicle",
+                "parameters": [
+                    {
+                        "name": "userVehicleId",
+                        "in": "path",
+                        "description": "user vehicle id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/vehicles/user/{userVehicleId}/upload-file": {
+            "post": {
+                "tags": [
+                    "User Vehicle"
+                ],
+                "summary": "upload user vehicle file",
+                "description": "upload user vehicle file",
+                "operationId": "uploadVehicleFile",
+                "parameters": [
+                    {
+                        "name": "userVehicleId",
+                        "in": "path",
+                        "description": "user vehicle id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "image": {
+                                        "description": "image",
+                                        "type": "file",
+                                        "example": "test"
+                                    },
+                                    "type": {
+                                        "description": "type",
+                                        "example": "vehicle_card_back,vehicle_card_front"
                                     }
                                 },
                                 "type": "object"
@@ -1125,6 +1387,13 @@
             }
         },
         {
+            "name": "Preference",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
             "name": "Ride",
             "externalDocs": {
                 "description": "",
@@ -1133,6 +1402,13 @@
         },
         {
             "name": "User",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name": "User Vehicle",
             "externalDocs": {
                 "description": "",
                 "url": ""

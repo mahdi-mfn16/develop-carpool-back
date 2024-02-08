@@ -31,30 +31,43 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-
-// ----------------- Dashboard Route ------------------------
-    Route::controller('DashboardController')->prefix('dashboard')->group(function(){
-        Route::get('users', 'homeUsers');
-        Route::post('search', 'searchUsers');
+// ----------------- User Vehicle Route ------------------------
+    Route::controller('UserVehicleController')->prefix('vehicles/user')->group(function(){
+        Route::post('/', 'createUserVehicle');
+        Route::put('/{userVehicleId}', 'updateUserVehicle');
+        Route::delete('/{userVehicleId}', 'deleteUserVehicle');
+        Route::post('/{userVehicleId}/upload-file', 'uploadVehicleFile');
+        
     });
+
+
+// ----------------- Preference Route ------------------------
+    Route::controller('PreferenceController')->prefix('preferences')->group(function(){
+        Route::get('/', 'getPreferences');
+      
+    });
+
+
+
+
 
 // ----------------- Chat Route ------------------------
-    Route::controller('ChatController')->prefix('chats')->group(function(){
-        Route::get('/', 'getUserChatList');
-        Route::post('/user-chat', 'showOneUserChat');
-        Route::post('/{chat}', 'showOneChat');
-        Route::delete('/{chat}', 'deleteChat');
-    });
+    // Route::controller('ChatController')->prefix('chats')->group(function(){
+    //     Route::get('/', 'getUserChatList');
+    //     Route::post('/user-chat', 'showOneUserChat');
+    //     Route::post('/{chat}', 'showOneChat');
+    //     Route::delete('/{chat}', 'deleteChat');
+    // });
 
 // ----------------- Message Route ------------------------
-    Route::controller('MessageController')->prefix('messages')->group(function(){
-        Route::post('/', 'getUserAllMessages');
-        Route::post('/send', 'sendMessage');
-        Route::post('/send-default', 'sendDefaultMessage');
-        Route::get('/default', 'getDefaultMessages');
-        Route::put('/update/{message}', 'updateMessage');
-        Route::delete('/delete/{message}', 'deleteMessage');
-    });
+    // Route::controller('MessageController')->prefix('messages')->group(function(){
+    //     Route::post('/', 'getUserAllMessages');
+    //     Route::post('/send', 'sendMessage');
+    //     Route::post('/send-default', 'sendDefaultMessage');
+    //     Route::get('/default', 'getDefaultMessages');
+    //     Route::put('/update/{message}', 'updateMessage');
+    //     Route::delete('/delete/{message}', 'deleteMessage');
+    // });
 
 
 
@@ -67,16 +80,6 @@ Route::middleware('auth:sanctum')->group(function () {
 //     });
 
 
-
-// ----------------- Image Route ------------------------
-    Route::controller('ImageController')->prefix('images')->group(function(){
-        // Route::get('user-profile', 'getUserImageProfile');
-        Route::get('user-images', 'getUserImages');
-        // Route::get('{image}', 'getImage');
-        Route::post('upload-image', 'uploadImage');
-        Route::post('update-profile-user', 'updateMainProfileImage');
-        Route::delete('{image}', 'deleteImage');
-    });
 
 // ----------------- Ride Route ------------------------
     Route::controller('RideController')->prefix('rides')->group(function(){

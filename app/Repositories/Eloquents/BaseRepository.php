@@ -23,7 +23,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function getAll()
     {
-        return $this->model->get();
+        return $this->model->with($this->load())->get();
     }
 
     public function create($params)

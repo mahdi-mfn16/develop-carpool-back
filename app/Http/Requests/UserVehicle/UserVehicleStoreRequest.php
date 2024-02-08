@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\UserVehicle;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UploadUserFileRequest extends FormRequest
+class UserVehicleStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class UploadUserFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|size:2048|dimensions:min_width=200,min_height=200,max_width=1000,max_height=1000',
-            'type' => 'required|string|in:profile,drive_license_back,drive_license_front,selfie'
-
+            'vehicle_id'=>'required|numeric|exists:vehicles,id',
+            'color' =>'required|string',
+            'year_model'=>'required|numeric',
+            'plate_number' => 'required|string',
         ];
     }
 }

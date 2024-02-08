@@ -22,6 +22,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             },
             'preferenceOptions' => function($q) {
                 $q->with(['preference']);
+            },
+            'vehicles' => function($q) {
+                $q->with(['vehicle']);
             }
         ];
     }

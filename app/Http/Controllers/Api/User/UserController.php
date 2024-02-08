@@ -300,7 +300,7 @@ class UserController extends Controller
      *      @OA\Property(
      *          property="type",
      *          description="type",
-     *          example="profile,drive_license_back,drive_license_front,vehicle_card_back,vehicle_card_front,selfie",
+     *          example="profile,drive_license_back,drive_license_front,selfie",
      *          @OA\Schema(type="string")
      *          ),
      *     ),

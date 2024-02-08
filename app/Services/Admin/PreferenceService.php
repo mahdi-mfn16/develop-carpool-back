@@ -30,4 +30,34 @@ class PreferenceService extends BaseService
 
 
 
+    public function getUserPreferences()
+    {
+        $user = auth('sanctum')->user();
+        $allOptions = $user->preferenceOptions;
+
+        $preferences = $this->indexAllItems();
+        foreach($preferences as $key=>$preference){
+
+            $preference->options->map(function($item) use($allOptions){
+               
+                $item['has'] = $allOptions->contains($item);
+            });
+
+            $nonOption = $preference->options->where('has', true)->first() ? false : true;
+
+            $preferences[$key]->options->push([
+                'id' => null,
+                'text' => 'عدم نمایش',
+                'has' => $nonOption,
+               
+            ]);
+        }
+
+        return $preferences;
+    }
+
+
+
+
+
 }

@@ -19,6 +19,31 @@ class UserVehicleRepository extends BaseRepository implements UserVehicleReposit
     }
 
 
+
+    public function createUserVehicle($userId, $request)
+    {
+        return $this->model->create([
+            'user_id' => $userId,
+            'vehicle_id' => $request->input('vehicle_id'),
+            'plate_number' => $request->input('plate_number'),
+            'year_model' => $request->input('year_model'),
+            'color' => $request->input('color'),
+            'status' => 0,
+        ]);
+    }
+
+
+    public function updateUserVehicle($vehicle, $request)
+    {
+        return $vehicle->update([
+            'vehicle_id' => $request->input('vehicle_id'),
+            'plate_number' => $request->input('plate_number'),
+            'year_model' => $request->input('year_model'),
+            'color' => $request->input('color'),
+        ]);
+    }
+
+
     
 
     

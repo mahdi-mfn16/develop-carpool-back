@@ -15,7 +15,7 @@ class PreferenceRepository extends BaseRepository implements PreferenceRepositor
 
     public function load()
     {
-        
+        return ['options'];
     }
 
     
