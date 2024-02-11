@@ -16,7 +16,7 @@ class ReportTypeRepository extends BaseRepository implements ReportTypeRepositor
 
     public function load()
     {
-        
+        return ['children'];
     }
 
     

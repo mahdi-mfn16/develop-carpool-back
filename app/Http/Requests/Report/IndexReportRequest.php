@@ -4,7 +4,7 @@ namespace App\Http\Requests\Report;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserReportRequest extends FormRequest
+class IndexReportRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,12 @@ class UserReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'reported_user_id' => 'required|numeric|exists:users,id',
-            'report_type_id' => 'required|numeric|exists:report_types,id',
-            'text' => 'sometimes|nullable|string|max:256'
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
+            'filters' => 'sometimes|array',
+            'filters.reported_user_id' => 'sometimes|nullable|numeric|exists:users,id',
+            'filters.report_type_id' => 'sometimes|nullable|numeric|exists:report_types,id',
+            'filters.search' => 'sometimes|nullable|string',
         ];
     }
 }

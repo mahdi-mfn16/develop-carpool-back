@@ -47,6 +47,14 @@ Route::middleware('auth:sanctum')->group(function () {
       
     });
 
+// ----------------- Review Route ------------------------
+    Route::controller('ReviewController')->prefix('reviews')->group(function(){
+        Route::get('/received', 'getMyReceivedReviews');
+        Route::get('/given', 'getMyGivenReviews');
+        Route::post('/{rideId}', 'createReview');
+
+    });
+
 
 
 
@@ -72,12 +80,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-// // ----------------- Report Route ------------------------
-//     Route::controller('ReportController')->prefix('reports')->group(function(){
-//         Route::get('reporting-users', 'getReportingUsers');
-//         Route::get('reported-users', 'getReportedUsers');
-//         Route::post('report-user', 'reportUser'); 
-//     });
+// ----------------- Report Route ------------------------
+    Route::controller('ReportController')->prefix('reports')->group(function(){
+        Route::post('/', 'reportUser'); 
+    });
+
+// ----------------- Report Route ------------------------
+    Route::controller('ReportTypeController')->prefix('reports')->group(function(){
+        Route::get('types', 'getReportTypes'); 
+    });
 
 
 

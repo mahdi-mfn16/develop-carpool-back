@@ -15,43 +15,32 @@ class ReportRepository extends BaseRepository implements ReportRepositoryInterfa
 
     public function load()
     {
-        
+        return ['reportType'];
     }
 
 
-
-    public function getReportingUsers($userId)
+    public function getAllReports($filters, $limit = 10)
     {
-        $reportingUsers = $this->model->where('reports.reported_user_id', $userId)
-        ->leftJoin('users', 'users.id', '=', 'reports.user_id')
-        ->selectRaw("
-            reports.reported_user_id,
-            reports.created_at as report_date,
-            users.*
-        ")
-        ->get();
+        $reports = $this->model->query();
+        $search = isset($filters['search']) ? $filters['search'] : '';
+        $reportTypeId = (isset($filters['report_type_id']) && $filters['report_type_id']) ? $filters['report_type_id'] : null;
+        $reportedUserId = (isset($filters['reported_user_id']) && $filters['reported_user_id']) ? $filters['reported_user_id'] : null;
 
-        return $reportingUsers;
+        if($reportTypeId){
+            $reports = $reports->where('report_type_id', $reportTypeId);
+        }
+        if($reportedUserId){
+            $reports = $reports->where('reported_user_id', $reportedUserId);
+        }
+
+        $reports = $reports->where('name', 'like', '%'.$search.'%')
+        ->with(['reportType', 'user', 'reportedUser'])->paginate($limit);
+
+        return $reports;
     }
 
 
 
-    public function getReportedUsers($userId)
-    {
-        $reportedUsers = $this->model->where('reports.user_id', $userId)
-        ->leftJoin('users', 'users.id', '=', 'reports.reported_user_id')
-        ->selectRaw("
-            reports.user_id,
-            reports.created_at as report_date,
-            users.*
-        ")
-        ->get();
-
-        return $reportedUsers;
-
-    }
-
- 
 
     public function reportUser($userId, $reportedUserId, $reportTypeId, $reportText)
     {

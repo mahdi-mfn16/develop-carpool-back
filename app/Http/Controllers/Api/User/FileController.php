@@ -19,61 +19,7 @@ class FileController extends Controller
     ){}
 
 
-    /**
-     * Display profile omage of user
-     *
-     */
-    public function getUserImageProfile()
-    {
-        $userId = auth('sanctum')->id();
-        $profile = $this->imageService->getUserImageProfile($userId);
-        return $this->successJsonResponse($profile);
-    }
 
-    /**
-     * Display list of user images
-     *
-     */
-    public function getUserImages()
-    {
-        $userId = auth('sanctum')->id();
-        $images = $this->imageService->getUserImages($userId);
-        return $this->successArrayResponse($images);
-    }
-
-    /**
-     * upload an image for one user
-     *
-     */
-    public function uploadImage(UploadImageRequest $request)
-    {
-        // return $request;
-        $userId = auth('sanctum')->id();
-        $image = $this->imageService->uploadImage($userId, $request, $directory='images', $type='profile');
-        return $this->successJsonResponse($image);
-    }
-
-    /**
-     * Display the specified image for one user.
-     *
-     */
-    public function getImage(File $image)
-    {
-        $image = $this->imageService->showItem($image['id']);
-        return $this->successJsonResponse($image);
-    }
-
-
-    /**
-     * Update the main image profile in storage.
-     *
-     */
-    public function updateMainProfileImage(UpdateProfileImageRequest $request)
-    {
-        $userId = auth('sanctum')->id();
-        $images = $this->imageService->updateMainProfileImage($userId, $request['image_id']);
-        return $this->successArrayResponse($images);
-    }
 
     /**
      * Remove the specified image from storage.

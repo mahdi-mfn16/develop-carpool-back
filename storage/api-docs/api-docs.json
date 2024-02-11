@@ -526,7 +526,7 @@
         "/api/preferences": {
             "get": {
                 "tags": [
-                    "Preference"
+                    "User Preference"
                 ],
                 "summary": "get list of preferences",
                 "description": "get list of preferences",
@@ -583,6 +583,148 @@
                 "security": [
                     {
                         "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/reviews/received": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "get list of my received reviews",
+                "description": "get list of my received reviews",
+                "operationId": "getMyReceivedReviews",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/reviews/given": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "get list of my given reviews",
+                "description": "get list of my given reviews",
+                "operationId": "getMyGivenReviews",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/reviews/{rideId}": {
+            "post": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "create a review",
+                "description": "create a review",
+                "operationId": "createReview",
+                "parameters": [
+                    {
+                        "name": "rideId",
+                        "in": "path",
+                        "description": "ride id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
                     }
                 ]
             }
@@ -1387,7 +1529,14 @@
             }
         },
         {
-            "name": "Preference",
+            "name": "User Preference",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name": "Review",
             "externalDocs": {
                 "description": "",
                 "url": ""

@@ -25,10 +25,6 @@ class CityController extends Controller
     ){}
 
 
-    /**
-     * Display a listing of the city.
-     *
-     */
 
      /**
      * @OA\Get(

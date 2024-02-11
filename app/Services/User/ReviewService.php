@@ -17,5 +17,39 @@ class ReviewService extends BaseService
 
 
 
+    public function getMyReceivedReviews($request)
+    {
+        $userId = auth('sanctum')->id();
+        $limit = $request->input('limit');
+        return $this->repository->getMyGivenReviews($userId, $limit);
+
+    }
+
+
+
+
+    public function getMyGivenReviews($request)
+    {
+        $userId = auth('sanctum')->id();
+        $limit = $request->input('limit');
+        return $this->repository->getMyReceivedReviews($userId, $limit);
+
+    }
+
+
+    public function createReview($request, $ride)
+    {
+        $params = [
+            'user_id' => auth('sanctum')->id(),
+            'reviewed_user_id' => $request->input('reviewed_user_id'),
+            'rate_id' => $request->input('rate_id'),
+            'ride_id' => $ride['id'],
+            'text' => $request->input('text')
+        ];
+
+        return $this->createItem($params);
+    }
+
+
      
 }

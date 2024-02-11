@@ -15,25 +15,19 @@ class ReportService extends BaseService
     }
 
 
-    public function getReportingUsers($userId)
+    public function getAllReports($request)
     {
-        return $this->repository->getReportingUsers($userId);
+        $limit = $request->input('limit');
+        $filters = $request->input('filters');
+        return $this->repository->getAllReports($filters, $limit);
     }
 
 
-
-    public function getReportedUsers($userId)
-    {
-        return $this->repository->getReportedUsers($userId);
-
-    }
-
- 
 
     public function reportUser($userId, $request)
     {
         $reportTypeId = $request['report_type_id'];
-        $reportText = $request['report_text'];
+        $reportText = $request['text'];
         $reportedUserId = $request['reported_user_id'];
         return $this->repository->reportUser($userId, $reportedUserId, $reportTypeId, $reportText);
     }
