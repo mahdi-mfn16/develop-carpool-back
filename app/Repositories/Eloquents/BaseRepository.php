@@ -61,4 +61,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->where($conditions)->get();
     }
+
+    public function findOneWithConditions($conditions)
+    {
+        return $this->model->where($conditions)->first();
+    }
 }

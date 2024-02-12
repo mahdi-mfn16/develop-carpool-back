@@ -108,7 +108,7 @@ class User extends Authenticatable
 
     public function applies()
     {
-        return $this->hasMany(PassengerApply::class, 'user_id', 'id');
+        return $this->hasMany(RideApply::class, 'user_id', 'id');
     }
 
     public function rides()

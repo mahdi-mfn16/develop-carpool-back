@@ -16,7 +16,7 @@ use App\Repositories\Eloquents\User\ChatRepository;
 use App\Repositories\Eloquents\User\FileRepository;
 use App\Repositories\Eloquents\User\MessageRepository;
 use App\Repositories\Eloquents\User\NotificationRepository;
-use App\Repositories\Eloquents\User\PassengerApplyRepository;
+use App\Repositories\Eloquents\User\RideApplyRepository;
 use App\Repositories\Eloquents\User\PaymentRepository;
 use App\Repositories\Eloquents\User\ReportRepository;
 use App\Repositories\Eloquents\User\ReviewRepository;
@@ -37,7 +37,7 @@ use App\Repositories\Interfaces\User\ChatRepositoryInterface;
 use App\Repositories\Interfaces\User\FileRepositoryInterface;
 use App\Repositories\Interfaces\User\MessageRepositoryInterface;
 use App\Repositories\Interfaces\User\NotificationRepositoryInterface;
-use App\Repositories\Interfaces\User\PassengerApplyRepositoryInterface;
+use App\Repositories\Interfaces\User\RideApplyRepositoryInterface;
 use App\Repositories\Interfaces\User\PaymentRepositoryInterface;
 use App\Repositories\Interfaces\User\ReportRepositoryInterface;
 use App\Repositories\Interfaces\User\ReviewRepositoryInterface;
@@ -79,7 +79,7 @@ class RepositoryServiceProvider extends ServiceProvider
 
 
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        $this->app->bind(PassengerApplyRepositoryInterface::class, PassengerApplyRepository::class);
+        $this->app->bind(RideApplyRepositoryInterface::class, RideApplyRepository::class);
         $this->app->bind(ReviewRepositoryInterface::class, ReviewRepository::class);
         $this->app->bind(ReportRepositoryInterface::class, ReportRepository::class);
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);

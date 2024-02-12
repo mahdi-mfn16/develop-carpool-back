@@ -18,4 +18,13 @@ return [
         'fake_user' => -1,
     ],
 
+
+    'ride_apply_status' => [
+        'pending' => 0,
+        'accept' => 1, 
+        'reject' => 2,
+        'cancel' => 3,
+        'closed' => 4,
+    ],
+
 ];

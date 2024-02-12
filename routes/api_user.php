@@ -25,9 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/complete-profile', 'createOrUpdateUserData');
         Route::put('/update-bio', 'updateUserBio');
         Route::post('/upload-file', 'uploadUserFile');
-        Route::put('/update-preference/{preference}', 'updateUserPreference');
-
-        
+        Route::put('/update-preference/{preference}', 'updateUserPreference');     
     });
 
 
@@ -36,23 +34,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'createUserVehicle');
         Route::put('/{userVehicleId}', 'updateUserVehicle');
         Route::delete('/{userVehicleId}', 'deleteUserVehicle');
-        Route::post('/{userVehicleId}/upload-file', 'uploadVehicleFile');
-        
+        Route::post('/{userVehicleId}/upload-file', 'uploadVehicleFile');     
     });
 
 
 // ----------------- Preference Route ------------------------
     Route::controller('PreferenceController')->prefix('preferences')->group(function(){
-        Route::get('/', 'getPreferences');
-      
+        Route::get('/', 'getPreferences'); 
     });
 
+    
 // ----------------- Review Route ------------------------
     Route::controller('ReviewController')->prefix('reviews')->group(function(){
         Route::get('/received', 'getMyReceivedReviews');
         Route::get('/given', 'getMyGivenReviews');
         Route::post('/{rideId}', 'createReview');
-
     });
 
 
@@ -85,7 +81,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'reportUser'); 
     });
 
-// ----------------- Report Route ------------------------
+// ----------------- Report Type Route ------------------------
     Route::controller('ReportTypeController')->prefix('reports')->group(function(){
         Route::get('types', 'getReportTypes'); 
     });

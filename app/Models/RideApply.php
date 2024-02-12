@@ -4,16 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PassengerApply extends Model
+class RideApply extends Model
 {
 
-    protected $table = 'passenger_applies';
+    protected $table = 'ride_applies';
 
     protected $fillable = [
         'ride_id',
         'user_id',
+        'price',
+        'fee',
         'capacity',
-        'status',
+        'status', // 0 => pending, 1 => accepted, 2 => rejected, 3 => closed
     ];
 
 

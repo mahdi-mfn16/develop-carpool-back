@@ -43,7 +43,7 @@ class Ride
 
     public function applies()
     {
-        return $this->hasMany(PassengerApply::class, 'ride_id', 'id');
+        return $this->hasMany(RideApply::class, 'ride_id', 'id');
     }
 
     public function origin()
