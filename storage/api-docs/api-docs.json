@@ -587,6 +587,93 @@
                 ]
             }
         },
+        "/api/reports": {
+            "post": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "report one user",
+                "description": "report one user",
+                "operationId": "reportUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "reported_user_id": {
+                                        "description": "reported user id",
+                                        "example": "1"
+                                    },
+                                    "report_type_id": {
+                                        "description": "report type id",
+                                        "example": "1"
+                                    },
+                                    "text": {
+                                        "description": "text",
+                                        "example": "test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/reports/types": {
+            "get": {
+                "tags": [
+                    "Report"
+                ],
+                "summary": "get list of report types",
+                "description": "get list of report types",
+                "operationId": "getReportTypes",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/reviews/received": {
             "get": {
                 "tags": [
@@ -1530,6 +1617,13 @@
         },
         {
             "name": "User Preference",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name": "Report",
             "externalDocs": {
                 "description": "",
                 "url": ""
