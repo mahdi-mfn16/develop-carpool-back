@@ -24,7 +24,6 @@ class StoreRideApplyRequest extends FormRequest
     public function rules()
     {
         return [
-            'price' => 'required|float',
             'capacity' => 'required|numeric|min:1',
         ];
     }

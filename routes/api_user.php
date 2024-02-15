@@ -87,10 +87,17 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-
 // ----------------- Ride Route ------------------------
     Route::controller('RideController')->prefix('rides')->group(function(){
         Route::get('/my-rides', 'getMyRides');
+        
+    });
+
+
+// ----------------- Ride Apply Route ------------------------
+    Route::controller('RideApplyController')->prefix('rides/apply')->group(function(){
+        Route::post('/{rideId}', 'sendRideApply');
+        Route::put('/status/{rideApplyId}', 'updateRideApplyStatus');
         
     });
     

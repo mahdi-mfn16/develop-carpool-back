@@ -24,7 +24,7 @@ class UpdateRideApplyRequest extends FormRequest
     public function rules()
     {
         return [
-            'action' => 'required|string|in:accept,reject',
+            'action' => 'required|string|in:accepted,rejected,canceled,accept_closed,reject_closed',
         ];
     }
 }

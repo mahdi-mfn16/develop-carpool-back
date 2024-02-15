@@ -145,7 +145,7 @@ class ChatRepository extends BaseRepository implements ChatRepositoryInterface
             $chat = $this->model->create([
                 'user_id_one' => $userId,
                 'user_id_two' => $otherUserId,
-                'chat_unique_id' => Helper::generateChatUniqueId(),
+                'ride_apply_id' => Helper::generateChatUniqueId(),
             ]);
 
             $chat = $this->getOneUserChat($userId, $otherUserId);

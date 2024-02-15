@@ -28,4 +28,10 @@ class RideApply extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+
+    public function chat()
+    {
+        return $this->hasOne(Chat::class, 'ride_apply_id', 'id');
+    }
 }

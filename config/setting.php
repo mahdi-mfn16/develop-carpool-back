@@ -21,10 +21,11 @@ return [
 
     'ride_apply_status' => [
         'pending' => 0,
-        'accept' => 1, 
-        'reject' => 2,
-        'cancel' => 3,
-        'closed' => 4,
+        'accepted' => 1, 
+        'rejected' => 2,
+        'canceled' => 3,
+        'accept_closed' => 4,
+        'reject_closed' => 5,
     ],
 
 ];
