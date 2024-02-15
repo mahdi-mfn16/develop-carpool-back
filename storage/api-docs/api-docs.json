@@ -816,6 +816,120 @@
                 ]
             }
         },
+        "/api/rides/apply/{rideId}": {
+            "post": {
+                "tags": [
+                    "Ride Apply"
+                ],
+                "summary": "create a review",
+                "description": "create a review",
+                "operationId": "sendRideApply",
+                "parameters": [
+                    {
+                        "name": "rideId",
+                        "in": "path",
+                        "description": "ride id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "capacity": {
+                                        "description": "capacity",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/rides/apply/status/{rideApplyId}": {
+            "put": {
+                "tags": [
+                    "Ride Apply"
+                ],
+                "summary": "update a ride apply status",
+                "description": "update a ride apply status",
+                "operationId": "updateRideApplyStatus",
+                "parameters": [
+                    {
+                        "name": "rideApplyId",
+                        "in": "path",
+                        "description": "ride apply id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "action": {
+                                        "description": "action",
+                                        "example": "accepted,rejected,canceled,accept_closed,reject_closed"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/rides/my-rides": {
             "get": {
                 "tags": [
@@ -1631,6 +1745,13 @@
         },
         {
             "name": "Review",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name": "Ride Apply",
             "externalDocs": {
                 "description": "",
                 "url": ""
