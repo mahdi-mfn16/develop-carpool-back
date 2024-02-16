@@ -26,11 +26,12 @@ class User extends Authenticatable
         'password',
         'national_code',
         'code',
-        'privilege', 
+        'privilege', // privilege  0 => free_user , 1 => vip_user,  10 => admin_user
         'birth_day',
         'gender',
         'about_me',
-        'status',
+        'status', // status  0 => not_verified , 1 => national_code_verified , 2 => car_lisence_verified , 3 => verified , 4 => deactive
+
     ];
 
     /**

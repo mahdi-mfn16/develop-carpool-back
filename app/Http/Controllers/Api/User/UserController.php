@@ -428,8 +428,8 @@ class UserController extends Controller
      */
     public function temporaryDeleteUser(User $user)
     {
-        $this->userService->deleteItem($user['id']);
-        return $this->successJsonResponse();
+        // $this->userService->deleteItem($user['id']);
+        // return $this->successJsonResponse();
     }
 
 
@@ -440,8 +440,8 @@ class UserController extends Controller
      */
     public function permanentDeleteUser(User $user)
     {
-        $this->userService->deleteItem($user['id']);
-        return $this->successJsonResponse();
+        // $this->userService->deleteItem($user['id']);
+        // return $this->successJsonResponse();
     }
 
 

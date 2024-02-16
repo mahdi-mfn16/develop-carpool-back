@@ -7,10 +7,12 @@ use App\Http\Requests\Review\IndexReviewRequest;
 use App\Http\Requests\Review\StoreReviewRequest;
 use App\Http\Resources\Review\ReviewCollection;
 use App\Http\Resources\Review\ReviewResource;
+use App\Models\Review;
 use App\Models\Ride;
 use App\Services\User\ReviewService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ReviewController extends Controller
 {
@@ -151,6 +153,7 @@ class ReviewController extends Controller
      */
     public function createReview(StoreReviewRequest $request, Ride $ride)
     {
+        Gate::authorize('create', [Review::class, $ride, $request->input('reviewed_user_id')]);
         $review = $this->reviewService->createReview($request, $ride);
         return $this->successJsonResponse(ReviewResource::make($review));
     }

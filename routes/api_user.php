@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 // ----------------- User Vehicle Route ------------------------
-    Route::controller('UserVehicleController')->prefix('vehicles/user')->group(function(){
+    Route::controller('UserVehicleController')->middleware(['verified_user'])->prefix('vehicles/user')->group(function(){
         Route::post('/', 'createUserVehicle');
         Route::put('/{userVehicleId}', 'updateUserVehicle');
         Route::delete('/{userVehicleId}', 'deleteUserVehicle');
@@ -48,7 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller('ReviewController')->prefix('reviews')->group(function(){
         Route::get('/received', 'getMyReceivedReviews');
         Route::get('/given', 'getMyGivenReviews');
-        Route::post('/{rideId}', 'createReview');
+        Route::post('/{rideId}', 'createReview')->middleware(['verified_user']);
     });
 
 
@@ -59,11 +59,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller('ChatController')->prefix('chats')->group(function(){
         Route::get('/', 'getChatList');
         Route::get('/{chatId}', 'showChat');
-        Route::delete('/{chatId}', 'deleteChat');
+        Route::delete('/{chatId}', 'deleteChat')->middleware(['verified_user']);
     });
 
 // ----------------- Message Route ------------------------
-    Route::controller('MessageController')->prefix('messages')->group(function(){
+    Route::controller('MessageController')->middleware(['verified_user'])->prefix('messages')->group(function(){
         Route::get('/{chatId}', 'getMessages');
         Route::post('/send/{chatId}', 'sendMessage');
         Route::put('/update/{messageId}', 'updateMessage');
@@ -74,7 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 // ----------------- Report Route ------------------------
-    Route::controller('ReportController')->prefix('reports')->group(function(){
+    Route::controller('ReportController')->middleware(['verified_user'])->prefix('reports')->group(function(){
         Route::post('/', 'reportUser'); 
     });
 
@@ -92,7 +92,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 // ----------------- Ride Apply Route ------------------------
-    Route::controller('RideApplyController')->prefix('rides/apply')->group(function(){
+    Route::controller('RideApplyController')->middleware(['verified_user'])->prefix('rides/apply')->group(function(){
         Route::post('/{rideId}', 'sendRideApply');
         Route::put('/status/{rideApplyId}', 'updateRideApplyStatus');
         

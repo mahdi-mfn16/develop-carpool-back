@@ -10,6 +10,7 @@ use App\Models\Ride;
 use App\Models\RideApply;
 use App\Services\User\RideApplyService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RideApplyController extends Controller
 {
@@ -71,7 +72,7 @@ class RideApplyController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function sendRideApply(StoreRideApplyRequest $request, Ride $ride)
-    {
+    {        
         $rideApply = $this->rideApplyService->sendRideApply($request, $ride);
         return $this->successJsonResponse(RideApplyResource::make($rideApply));
     }
@@ -118,6 +119,7 @@ class RideApplyController extends Controller
      */
     public function updateRideApplyStatus(UpdateRideApplyRequest $request, RideApply $rideApply)
     {
+        Gate::authorize('update', [$rideApply, $request->input('action')]);
         $rideApply = $this->rideApplyService->updateRideApplyStatus($request, $rideApply);
         return $this->successJsonResponse(RideApplyResource::make($rideApply));
     }

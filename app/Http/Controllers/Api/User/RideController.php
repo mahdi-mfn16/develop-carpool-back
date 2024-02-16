@@ -173,6 +173,8 @@ class RideController extends Controller
 
     public function createRide(RideStoreRequest $request)
     {
+        // ride create gate
+        
         $ride = $this->rideService->createRide($request);
         return $this->successJsonResponse(RideResource::make($ride));
     }

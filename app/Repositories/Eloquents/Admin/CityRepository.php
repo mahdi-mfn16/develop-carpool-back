@@ -15,7 +15,7 @@ class CityRepository extends BaseRepository implements CityRepositoryInterface
 
     public function load()
     {
-        
+        return ['province'];
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Notification\UpdateNotificationRequest;
+use App\Http\Resources\Notification\NotificationResource;
 use App\Services\Admin\NotificationTypeService;
 use App\Services\User\NotificationService;
 use Illuminate\Http\Request;
@@ -27,20 +28,9 @@ class NotificationController extends Controller
     {
         $userId = auth('sanctum')->id();
         $notifs = $this->notificationService->getUserNofications($userId);
-        return $this->successArrayResponse($notifs);
+        return $this->successArrayResponse(NotificationResource::collection($notifs));
     }
 
 
-
-    /**
-     * update one type notifications of user.
-     *
-     */
-    public function updateUserNofication(UpdateNotificationRequest $request)
-    {
-        // $user = auth('sanctum')->user();
-        // $status = $this->notificationTypeService->updateUserNoficationType($user, $request);
-        // return $this->successJsonResponse($status);
-    }
 
 }

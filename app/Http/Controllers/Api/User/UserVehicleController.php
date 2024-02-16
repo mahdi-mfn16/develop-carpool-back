@@ -14,6 +14,7 @@ use App\Services\User\ReviewService;
 use App\Services\User\UserVehicleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class UserVehicleController extends Controller
 {
@@ -158,6 +159,7 @@ class UserVehicleController extends Controller
      */
     public function updateUserVehicle(UserVehicleStoreRequest $request, UserVehicle $userVehicle)
     {
+        Gate::authorize('update', $userVehicle);
         if($userVehicle['status'] != 0){
             return $this->errorResponse(UserVehicleResource::make($userVehicle), 'you cant edit anymore');
         }
@@ -198,6 +200,7 @@ class UserVehicleController extends Controller
      */
     public function deleteUserVehicle(UserVehicle $userVehicle)
     {
+        Gate::authorize('delete', $userVehicle);
         $this->userVehicleService->deleteItem($userVehicle['id']);
         return $this->successJsonResponse();
     }
@@ -256,7 +259,7 @@ class UserVehicleController extends Controller
         $user = auth('sanctum')->user();
         $image = $this->fileService->uploadImage($user['id'], $request['image'], $userVehicle, $directory='images', $request->input('type'));
         $vehicle = $this->userVehicleService->showItem($user['id']);
-        return $this->successJsonResponse(UserVehicleResource::make($user));
+        return $this->successJsonResponse(UserVehicleResource::make($vehicle));
     }
 
 

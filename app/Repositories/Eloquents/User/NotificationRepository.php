@@ -15,22 +15,15 @@ class NotificationRepository extends BaseRepository implements NotificationRepos
 
     public function load()
     {
-        
+        return ['notificationType'];
     }
 
 
     public function getUserNofications($userId)
     {
-        return $this->model->where('notifications.user_id', $userId)
-            ->join('notification_types', 'notification_types.id', '=', 'notifications.notification_type_id')
-            ->selectRaw("
-                notifications.user_id,
-                notifications.message,
-                notifications.created_at as notification_date,
-                notification_types.id as notification_type_id,
-                notification_types.name as notification_type,
-                notification_types.text as notification_type_name
-            ")->get();
+        return $this->model->where('user_id', $userId)
+            ->with(['notificationType'])
+            ->get();
     }
 
 
