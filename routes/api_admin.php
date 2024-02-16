@@ -25,6 +25,15 @@ Route::middleware([])->group(function () {
         Route::delete('/{cityId}', 'destroy');
     });
 
+// ----------------- Province Route ------------------------
+    Route::controller('ProvinceController')->prefix('provinces')->group(function(){
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{provinceId}', 'show');
+        Route::put('/{provinceId}', 'update');
+        Route::delete('/{provinceId}', 'destroy');
+    });
+
     // ----------------- User Route ------------------------
         // Route::controller('UserController')->prefix('users')->group(function(){
         //     Route::get('user-info', 'getUserInfo');
