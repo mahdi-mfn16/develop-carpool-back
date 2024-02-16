@@ -13,7 +13,7 @@ class ChatIndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class ChatIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'chat_unique_id' => 'required|string|exists:chats,chat_unique_id'
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
         ];
     }
 }

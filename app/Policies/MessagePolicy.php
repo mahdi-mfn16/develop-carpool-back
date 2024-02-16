@@ -43,9 +43,12 @@ class MessagePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Chat $chat)
     {
-        //
+        $rideApply = $chat->rideApply;
+        return (($user->id == $chat->user_id_one || $user->id == $chat->user_id_two) && $rideApply->status == 'accepted')
+        ? Response::allow()
+        : Response::deny('you are not allowed');
     }
 
     /**
@@ -57,7 +60,10 @@ class MessagePolicy
      */
     public function update(User $user, Message $message)
     {
-        return $user->id == $message->from_user_id or $user->id == $message->to_user_id
+ 
+        $chat = $message->chat;
+        $rideApply = $chat->rideApply;
+        return (($user->id == $message->from_user_id or $user->id == $message->to_user_id) && $rideApply->status == 'accepted')
         ? Response::allow()
         : Response::deny('you are not allowed');
     }
@@ -71,7 +77,9 @@ class MessagePolicy
      */
     public function delete(User $user, Message $message)
     {
-        return $user->id == $message->from_user_id or $user->id == $message->to_user_id
+        $chat = $message->chat;
+        $rideApply = $chat->rideApply;
+        return (($user->id == $message->from_user_id or $user->id == $message->to_user_id) && $rideApply->status == 'accepted')
         ? Response::allow()
         : Response::deny('you are not allowed');
     }
@@ -97,8 +105,6 @@ class MessagePolicy
      */
     public function forceDelete(User $user, Message $message)
     {
-        return $user->id == $message->from_user_id or $user->id == $message->to_user_id
-        ? Response::allow()
-        : Response::deny('you are not allowed');
+        
     }
 }

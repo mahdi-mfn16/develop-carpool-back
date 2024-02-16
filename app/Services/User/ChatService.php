@@ -20,9 +20,10 @@ class ChatService extends BaseService
 
 
 
-    public function getUserChatList($userId)
+    public function getUserChatList($userId, $request)
     {
-        return $this->repository->getUserChatList($userId);
+        $limit = $request->input('limit');
+        return $this->repository->getUserChatList($userId, $limit);
     }
 
 

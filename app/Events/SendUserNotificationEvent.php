@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Http\Resources\Notification\NotificationResource;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -34,5 +35,27 @@ class SendUserNotificationEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return new PrivateChannel('private-notification-'.$this->notification['user_id']);
+    }
+
+
+    /**
+     * The event's broadcast name.
+     *
+     * @return string
+     */
+    public function broadcastAs()
+    {
+        return 'user_notification';
+    }
+
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return ['item' => NotificationResource::make($this->notification)];
     }
 }

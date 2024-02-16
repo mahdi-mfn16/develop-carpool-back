@@ -22,43 +22,37 @@ class MessageService extends BaseService
     }
 
 
-    public function getChatAllMessages($chatId)
+    public function getChatMessages($chatId, $request)
     {
-        return $this->repository->getChatAllMessages($chatId);
+        $limit = $request->input('limit');
+        return $this->repository->getChatMessages($chatId, $limit);
     }
 
 
 
 
-    public function getUserAllMessages($userId, $otherUserId)
+    public function sendMessage($request, $chat)
     {
-        $chat = $this->chatRepo->getOneUserChat($userId, $otherUserId);
-        return $this->repository->getChatAllMessages($chat['chat_unique_id']);
-    }
-
-
-
-
-    public function sendMessage($userId, $request)
-    {
-        $otherUserId = $request['user_id'];
-        $message = $request['message'];
-        $chat = $this->chatRepo->getOrCreateChat($userId, $otherUserId);
-        $message = $this->repository->sendMessage($userId, $otherUserId, $message, $chat);
+        $userId = auth('sanctum')->id();
+        $message = $request->input('message');
+        $message = $this->repository->sendMessage($userId, $message, $chat);
+        
         event(new ChatMessageEvent('create', $message));
+
         return $message;
-        // $messages = $this->repository->getChatAllMessages($message['chat_unique_id']);
-        // return $messages;
+ 
     }
 
 
-    public function updateMessage($messageId, $newMessage)
+    public function updateMessage($request, $message)
     {
-        $message = $this->repository->updateMessage($messageId, $newMessage);
+        $newMessageText = $request->input('message');
+        $message = $this->repository->updateMessage($message, $newMessageText);
+        
         event(new ChatMessageEvent('update', $message));
+        
         return $message;
-        // $messages = $this->repository->getChatAllMessages($message['chat_unique_id']);
-        // return $messages;
+   
     }
 
 
@@ -69,9 +63,9 @@ class MessageService extends BaseService
         $this->deleteItem($message['id']);
        
         event(new ChatMessageEvent('delete', $deletedMessage));
+        
         return [];
-        // $messages = $this->getChatAllMessages($message['chat_unique_id']);
-        // return $messages;
+        
     }
 
      

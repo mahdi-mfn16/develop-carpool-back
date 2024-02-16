@@ -56,22 +56,19 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 // ----------------- Chat Route ------------------------
-    // Route::controller('ChatController')->prefix('chats')->group(function(){
-    //     Route::get('/', 'getUserChatList');
-    //     Route::post('/user-chat', 'showOneUserChat');
-    //     Route::post('/{chat}', 'showOneChat');
-    //     Route::delete('/{chat}', 'deleteChat');
-    // });
+    Route::controller('ChatController')->prefix('chats')->group(function(){
+        Route::get('/', 'getChatList');
+        Route::get('/{chatId}', 'showChat');
+        Route::delete('/{chatId}', 'deleteChat');
+    });
 
 // ----------------- Message Route ------------------------
-    // Route::controller('MessageController')->prefix('messages')->group(function(){
-    //     Route::post('/', 'getUserAllMessages');
-    //     Route::post('/send', 'sendMessage');
-    //     Route::post('/send-default', 'sendDefaultMessage');
-    //     Route::get('/default', 'getDefaultMessages');
-    //     Route::put('/update/{message}', 'updateMessage');
-    //     Route::delete('/delete/{message}', 'deleteMessage');
-    // });
+    Route::controller('MessageController')->prefix('messages')->group(function(){
+        Route::get('/{chatId}', 'getMessages');
+        Route::post('/send/{chatId}', 'sendMessage');
+        Route::put('/update/{messageId}', 'updateMessage');
+        Route::delete('/delete/{messageId}', 'deleteMessage');
+    });
 
 
 

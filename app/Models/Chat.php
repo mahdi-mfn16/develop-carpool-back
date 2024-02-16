@@ -35,4 +35,9 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class, 'user_id_two', 'id');
     }
+
+    public function user()
+    {
+        return ($this->user_id_one == auth('sanctum')->id()) ? $this->userTwo : $this->userOne;
+    }
 }

@@ -13,7 +13,7 @@ class SendMessageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,7 @@ class SendMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|int|exists:users,id',
-            'message' => 'required|string',
+            'message' => 'required|string|min:1',
         ];
     }
 }

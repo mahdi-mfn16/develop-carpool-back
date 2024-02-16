@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chat\ChatIndexRequest;
 use App\Http\Requests\Chat\ChatUserIndexRequest;
+use App\Http\Resources\Chat\ChatCollection;
+use App\Http\Resources\Chat\ChatResource;
 use App\Models\Chat;
 use App\Services\User\ChatService;
 use Illuminate\Http\Request;
@@ -33,11 +35,23 @@ class ChatController extends Controller
      /**
      * @OA\Get(
      *      path="/api/chats",
-     *      operationId="getUserChatList",
+     *      operationId="getChatList",
      *      tags={"Chat"},
-     *      summary="get list of all chats for one user",
-     *      description="get list of all chats for one user",
+     *      summary="get list of all chats of user",
+     *      description="get list of all chats of user",
      *      security={{"bearer_token":{}}},
+     *      @OA\Parameter(
+     *         name="page",
+     *         description="page",
+     *         in = "query",
+     *         @OA\Schema(type="integer") 
+     *       ),
+     *      @OA\Parameter(
+     *         name="limit",
+     *         description="limit",
+     *         in = "query",
+     *         @OA\Schema(type="integer") 
+     *       ),
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",
@@ -54,81 +68,29 @@ class ChatController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function getUserChatList()
+    public function getChatList(ChatIndexRequest $request)
     {
         $userId = auth('sanctum')->id();
-        $chats = $this->chatService->getUserChatList($userId);
-        return $this->successArrayResponse($chats);
+        $chats = $this->chatService->getUserChatList($userId, $request);
+        return $this->successPaginateResponse(new ChatCollection($chats));
     }
-
-
-
-    /**
-     * @OA\Post(
-     *      path="/api/chats/user-chat",
-     *      operationId="showOneUserChat",
-     *      tags={"Chat"},
-     *      summary="show one user chat base on user_id",
-     *      description="show one user chat base on user_id",
-     *      security={{"bearer_token":{}}},
-     *    @OA\RequestBody(
-     *    @OA\JsonContent(
-     *      @OA\Property(
-     *          property="user_id",
-     *          description="user_id",
-     *          example=1,
-     *          @OA\Schema(type="integer")
-     *          ),
-     *     ),
-     *     ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @OA\MediaType(
-     *               mediaType="application/json",
-     *          )
-     *
-     *       ),
-     *       @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=401, description="Unauthorized"),
-     *     )
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-
-    public function showOneUserChat(ChatUserIndexRequest $request)
-    {
-        $userId = auth('sanctum')->id();
-        $otherUserId = $request['user_id'];
-
-        $chatInfo = $this->chatService->showOneUserChat($userId, $otherUserId);
-
-        return $this->successJsonResponse($chatInfo);
-
-    }
-
 
 
 
      /**
-     * @OA\Post(
-     *      path="/api/chats/{chat}",
-     *      operationId="showOneChat",
+     * @OA\Get(
+     *      path="/api/chats/{chatId}",
+     *      operationId="showChat",
      *      tags={"Chat"},
-     *      summary="show one specific chat base on chat unique id",
-     *      description="show one specific chat base on chat unique id",
+     *      summary="show one specific chat",
+     *      description="show one specific chat",
      *      security={{"bearer_token":{}}},
-     *    @OA\RequestBody(
-     *    @OA\JsonContent(
-     *      @OA\Property(
-     *          property="chat_unique_id",
-     *          description="chat_unique_id",
-     *          example="43dfg",
-     *          @OA\Schema(type="string")
-     *          ),
-     *     ),
-     *     ),
+     *      @OA\Parameter(
+     *         name="chatId",
+     *         description="chat id",
+     *         in = "path",
+     *         @OA\Schema(type="integer") 
+     *       ),
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",
@@ -144,18 +106,11 @@ class ChatController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function showOneChat(ChatIndexRequest $request, Chat $chat)
+    public function showChat(Chat $chat)
     {
-        $userId = auth('sanctum')->id();
-        $chatId = $request['chat_unique_id'];
-
         Gate::authorize('view', $chat);
-
-        $chat = $this->chatService->getOneChat($chatId);
-
-        // $chatInfo = $this->chatService->showOneChat($userId, $chat);
-
-        return $this->successJsonResponse($chat);
+        $chat = $this->chatService->showItem($chat['id']);
+        return $this->successJsonResponse(ChatResource::make($chat));
     }
 
 
@@ -163,12 +118,18 @@ class ChatController extends Controller
 
       /**
      * @OA\Delete(
-     *      path="/api/chats/{chat}",
+     *      path="/api/chats/{chatId}",
      *      operationId="deleteChat",
      *      tags={"Chat"},
      *      summary="remove one chat",
      *      description="remove one chat",
      *      security={{"bearer_token":{}}},
+     *      @OA\Parameter(
+     *         name="chatId",
+     *         description="chat id",
+     *         in = "path",
+     *         @OA\Schema(type="integer") 
+     *       ),
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",
@@ -187,9 +148,10 @@ class ChatController extends Controller
 
     public function deleteChat(Chat $chat)
     {
-        Gate::authorize('delete', $chat);
+        // ride apply of chat must be closed or expired
+        // Gate::authorize('delete', $chat);
         
-        $this->chatService->deleteItem($chat['id']);
-        return $this->successJsonResponse();
+        // $this->chatService->deleteItem($chat['id']);
+        return $this->successJsonResponse(['text' => 'this API is coming soon']);
     }
 }

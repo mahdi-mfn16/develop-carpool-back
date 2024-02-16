@@ -90,9 +90,27 @@
                 "tags": [
                     "Chat"
                 ],
-                "summary": "get list of all chats for one user",
-                "description": "get list of all chats for one user",
-                "operationId": "getUserChatList",
+                "summary": "get list of all chats of user",
+                "description": "get list of all chats of user",
+                "operationId": "getChatList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -117,76 +135,24 @@
                 ]
             }
         },
-        "/api/chats/user-chat": {
-            "post": {
+        "/api/chats/{chatId}": {
+            "get": {
                 "tags": [
                     "Chat"
                 ],
-                "summary": "show one user chat base on user_id",
-                "description": "show one user chat base on user_id",
-                "operationId": "showOneUserChat",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "user_id": {
-                                        "description": "user_id",
-                                        "example": 1
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {}
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                },
-                "security": [
+                "summary": "show one specific chat",
+                "description": "show one specific chat",
+                "operationId": "showChat",
+                "parameters": [
                     {
-                        "bearer_token": []
-                    }
-                ]
-            }
-        },
-        "/api/chats/{chat}": {
-            "post": {
-                "tags": [
-                    "Chat"
-                ],
-                "summary": "show one specific chat base on chat unique id",
-                "description": "show one specific chat base on chat unique id",
-                "operationId": "showOneChat",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "chat_unique_id": {
-                                        "description": "chat_unique_id",
-                                        "example": "43dfg"
-                                    }
-                                },
-                                "type": "object"
-                            }
+                        "name": "chatId",
+                        "in": "path",
+                        "description": "chat id",
+                        "schema": {
+                            "type": "integer"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -217,6 +183,16 @@
                 "summary": "remove one chat",
                 "description": "remove one chat",
                 "operationId": "deleteChat",
+                "parameters": [
+                    {
+                        "name": "chatId",
+                        "in": "path",
+                        "description": "chat id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -316,7 +292,65 @@
                 ],
                 "summary": "get list of all messages for one chat ",
                 "description": "get list of all messages for one chat",
-                "operationId": "getChatAllMessages",
+                "operationId": "getMessages",
+                "parameters": [
+                    {
+                        "name": "chatId",
+                        "in": "path",
+                        "description": "chat_id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/messages/send/{chatId}": {
+            "post": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "send a message in one chat ",
+                "description": "send a message in one chat",
+                "operationId": "sendMessage",
                 "parameters": [
                     {
                         "name": "chatId",
@@ -327,89 +361,11 @@
                         }
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {}
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                },
-                "security": [
-                    {
-                        "bearer_token": []
-                    }
-                ]
-            }
-        },
-        "/api/messages": {
-            "get": {
-                "tags": [
-                    "Message"
-                ],
-                "summary": "get list of all messages for one chat ",
-                "description": "get list of all messages for one chat",
-                "operationId": "getUserChatAllMessages",
-                "parameters": [
-                    {
-                        "name": "user_id",
-                        "in": "path",
-                        "description": "user_id",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {}
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                },
-                "security": [
-                    {
-                        "bearer_token": []
-                    }
-                ]
-            }
-        },
-        "/api/messages/send": {
-            "post": {
-                "tags": [
-                    "Message"
-                ],
-                "summary": "send a message to one user ",
-                "description": "send a message to one user",
-                "operationId": "sendMessage",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "user_id": {
-                                        "description": "user_id",
-                                        "example": 1
-                                    },
                                     "message": {
                                         "description": "message",
                                         "example": 1
@@ -452,6 +408,16 @@
                 "summary": "update and edit one message",
                 "description": "update and edit one message",
                 "operationId": "updateMessage",
+                "parameters": [
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -499,6 +465,16 @@
                 "summary": "remove one message",
                 "description": "remove one message",
                 "operationId": "deleteMessage",
+                "parameters": [
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1724,6 +1700,13 @@
     "tags": [
         {
             "name": "Location",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name": "Message",
             "externalDocs": {
                 "description": "",
                 "url": ""

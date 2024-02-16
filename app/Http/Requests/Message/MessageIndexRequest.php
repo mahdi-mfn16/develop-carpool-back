@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Chat;
+namespace App\Http\Requests\Message;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChatUserIndexRequest extends FormRequest
+class MessageIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ChatUserIndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class ChatUserIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|numeric|exists:users,id'
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
         ];
     }
 }

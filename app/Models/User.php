@@ -55,20 +55,14 @@ class User extends Authenticatable
 
 
 
-    // public function profile()
-    // {
-    //     return $this->morphMany(File::class, 'filable')->where('type', 'profile');
-    // }
-
-
     public function hostChats()
     {
-        return $this->hasMany(Chat::class, 'user_id_two', 'id');
+        return $this->hasMany(Chat::class, 'user_id_one', 'id');
     }
 
     public function guestChats()
     {
-        return $this->hasMany(Chat::class, 'filable')->merge($this->hasMany(Chat::class, 'filable'));
+        return $this->hasMany(Chat::class, 'user_id_two', 'id');
     }
 
 
