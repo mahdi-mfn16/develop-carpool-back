@@ -14,5 +14,12 @@ class ProvinceService extends BaseService
         parent::__construct($provinceRepo);
     }
 
+
+    public function getProvinces($request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit');
+        return $this->repository->getProvinces($filters, $limit);
+    }
     
 }

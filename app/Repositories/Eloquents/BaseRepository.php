@@ -26,6 +26,11 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->with($this->load())->get();
     }
 
+    public function getAllPaginated($limit)
+    {
+        return $this->model->with($this->load())->paginate($limit);
+    }
+
     public function create($params)
     {
         return $this->model->create($params);

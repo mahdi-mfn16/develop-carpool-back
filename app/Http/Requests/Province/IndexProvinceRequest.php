@@ -24,7 +24,10 @@ class IndexProvinceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
+            'filters' => 'sometimes|array',
+            'filters.search' => 'sometimes|nullable|string',
         ];
     }
 }

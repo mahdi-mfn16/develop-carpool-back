@@ -12,7 +12,7 @@ class CityController extends Controller
 {
     /**
      * @OA\Tag(
-     *      name="Location",
+     *      name="City",
      *     @OA\ExternalDocumentation(
      *         description="",
      *         url=""
@@ -30,7 +30,7 @@ class CityController extends Controller
      * @OA\Get(
      *      path="/api/cities",
      *      operationId="getCities",
-     *      tags={"Location"},
+     *      tags={"City"},
      *      summary="get list of cities of province",
      *      description="get list of cities of province",
      *      security={{"bearer":{}}},

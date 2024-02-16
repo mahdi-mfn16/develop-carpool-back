@@ -18,5 +18,17 @@ class ProvinceRepository extends BaseRepository implements ProvinceRepositoryInt
         
     }
 
+
+    public function getProvinces($filters, $limit = 10)
+    {
+        $provinces = $this->model->query();
+        $search = isset($filters['search']) ? $filters['search'] : '';
+
+        $provinces = $provinces->where('name', 'like', '%'.$search.'%')
+        ->paginate($limit);
+
+        return $provinces;
+    }
+
     
 }

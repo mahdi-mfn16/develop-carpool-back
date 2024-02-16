@@ -19,6 +19,11 @@ class BaseService
         return $this->repository->getAll();
     }
 
+    public function indexAllPaginated($limit)
+    {
+        return $this->repository->getAllPaginated($limit);
+    }
+
     public function showItem($id)
     {
         return $this->repository->find($id);

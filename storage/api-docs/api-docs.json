@@ -86,7 +86,7 @@
                                 "properties": {
                                     "name": {
                                         "description": "name",
-                                        "example": 1
+                                        "example": "test"
                                     },
                                     "province_id": {
                                         "description": "province id",
@@ -234,6 +234,247 @@
                         "name": "cityId",
                         "in": "path",
                         "description": "city id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/provinces": {
+            "get": {
+                "tags": [
+                    "Admin - Province"
+                ],
+                "summary": "get list of provinces",
+                "description": "get list of provinces",
+                "operationId": "getAdminProvinces",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filters[search]",
+                        "in": "query",
+                        "description": "search",
+                        "schema": {
+                            "type": "string",
+                            "example": ""
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin - Province"
+                ],
+                "summary": "create one province",
+                "description": "create one province",
+                "operationId": "storeAdminProvince",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "example": "test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/cities/{provinceId}": {
+            "get": {
+                "tags": [
+                    "Admin - Province"
+                ],
+                "summary": "show one province",
+                "description": "show one province",
+                "operationId": "showAdminProvince",
+                "parameters": [
+                    {
+                        "name": "provinceId",
+                        "in": "path",
+                        "description": "province id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Admin - Province"
+                ],
+                "summary": "update one province",
+                "description": "update one province",
+                "operationId": "updateAdminProvince",
+                "parameters": [
+                    {
+                        "name": "provinceId",
+                        "in": "path",
+                        "description": "province id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "example": "test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin - Province"
+                ],
+                "summary": "destroy one province",
+                "description": "destroy one province",
+                "operationId": "destroyAdminProvince",
+                "parameters": [
+                    {
+                        "name": "provinceId",
+                        "in": "path",
+                        "description": "province id",
                         "schema": {
                             "type": "integer"
                         }
@@ -478,7 +719,7 @@
         "/api/cities": {
             "get": {
                 "tags": [
-                    "Location"
+                    "City"
                 ],
                 "summary": "get list of cities of province",
                 "description": "get list of cities of province",
@@ -792,7 +1033,7 @@
         "/api/provinces": {
             "get": {
                 "tags": [
-                    "Location"
+                    "Province"
                 ],
                 "summary": "get list of provinces",
                 "description": "get list of provinces",
@@ -1964,7 +2205,14 @@
             }
         },
         {
-            "name": "Location",
+            "name": "Admin - Province",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name": "City",
             "externalDocs": {
                 "description": "",
                 "url": ""
@@ -1979,6 +2227,13 @@
         },
         {
             "name": "User Preference",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name": "Province",
             "externalDocs": {
                 "description": "",
                 "url": ""

@@ -15,13 +15,7 @@ use Illuminate\Http\Request;
 class CityController extends Controller
 {
     /**
-     * @OA\Tag(
-     *      name="Admin - City",
-     *     @OA\ExternalDocumentation(
-     *         description="",
-     *         url=""
-     *     )
-     * )
+     * @OA\Tag( name="Admin - City", @OA\ExternalDocumentation( description="", url="" ) )
      */
 
     public function __construct(
@@ -104,7 +98,7 @@ class CityController extends Controller
      *       @OA\Property(
      *          property="name",
      *          description="name",
-     *          example=1,
+     *          example="test",
      *          @OA\Schema(type="string")
      *          ),
      *      @OA\Property(

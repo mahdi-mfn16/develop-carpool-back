@@ -8,6 +8,15 @@ use App\Services\Admin\ProvinceService;
 
 class ProvinceController extends Controller
 {
+    /**
+     * @OA\Tag(
+     *      name="Province",
+     *     @OA\ExternalDocumentation(
+     *         description="",
+     *         url=""
+     *     )
+     * )
+     */
 
     public function __construct(
         private ProvinceService $provinceService
@@ -18,7 +27,7 @@ class ProvinceController extends Controller
      * @OA\Get(
      *      path="/api/provinces",
      *      operationId="getProvinces",
-     *      tags={"Location"},
+     *      tags={"Province"},
      *      summary="get list of provinces",
      *      description="get list of provinces",
      *      security={{"bearer":{}}},  
