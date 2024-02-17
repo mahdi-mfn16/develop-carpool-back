@@ -15,5 +15,13 @@ class PreferenceOptionService extends BaseService
     }
 
 
+    public function getPreferenceOptions($request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit') ?: 10;
+        return $this->repository->getPreferenceOptions($filters, $limit);
+    }
+
+
 
 }

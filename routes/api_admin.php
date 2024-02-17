@@ -52,6 +52,15 @@ Route::middleware([])->group(function () {
         Route::delete('/{reportTypeId}', 'destroy');
     });
 
+// ----------------- Preference Option Route ------------------------
+    Route::controller('PreferenceOptionController')->prefix('preferences/options')->group(function(){
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{preferenceOptionId}', 'show');
+        Route::put('/{preferenceOptionId}', 'update');
+        Route::delete('/{preferenceOptionId}', 'destroy');
+    });
+
 
 // ----------------- Preference Route ------------------------
     Route::controller('PreferenceController')->prefix('preferences')->group(function(){
@@ -88,11 +97,7 @@ Route::middleware([])->group(function () {
         //     Route::post('/{userVehicleId}/upload-file', 'uploadVehicleFile');     
         // });
     
-    
-    // ----------------- Preference Route ------------------------
-        // Route::controller('PreferenceController')->prefix('preferences')->group(function(){
-        //     Route::get('/', 'getPreferences'); 
-        // });
+
     
         
     // ----------------- Review Route ------------------------

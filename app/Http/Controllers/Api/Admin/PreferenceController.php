@@ -26,7 +26,7 @@ class PreferenceController extends Controller
      * @OA\Get(
      *      path="/api/admin/preferences",
      *      operationId="getAdminPreferences",
-     *      tags={"Admin - Preference "},
+     *      tags={"Admin - Preference"},
      *      summary="get list of preferences ",
      *      description="get list of preferences ",
      *      security={{"bearer_token":{}}},  
