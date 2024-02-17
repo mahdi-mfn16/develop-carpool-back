@@ -78,6 +78,14 @@ Route::middleware([])->group(function () {
         Route::delete('/{reportId}', 'destroy');
     });
 
+// ----------------- Review Route ------------------------
+    Route::controller('ReviewController')->prefix('reviews')->group(function(){
+        Route::get('/', 'index');
+        Route::get('/{reviewId}', 'show');
+        Route::delete('/{reviewId}', 'destroy');
+        Route::put('/toggle-status/{reviewId}', 'destroy');
+    });
+
     // ----------------- User Route ------------------------
         // Route::controller('UserController')->prefix('users')->group(function(){
         //     Route::get('user-info', 'getUserInfo');
@@ -100,34 +108,9 @@ Route::middleware([])->group(function () {
 
     
         
-    // ----------------- Review Route ------------------------
-        // Route::controller('ReviewController')->prefix('reviews')->group(function(){
-        //     Route::get('/received', 'getMyReceivedReviews');
-        //     Route::get('/given', 'getMyGivenReviews');
-        //     Route::post('/{rideId}', 'createReview');
-        // });
     
     
     
-    
-    
-    // ----------------- Chat Route ------------------------
-        // Route::controller('ChatController')->prefix('chats')->group(function(){
-        //     Route::get('/', 'getChatList');
-        //     Route::get('/{chatId}', 'showChat');
-        //     Route::delete('/{chatId}', 'deleteChat');
-        // });
-    
-    // ----------------- Message Route ------------------------
-        // Route::controller('MessageController')->prefix('messages')->group(function(){
-        //     Route::get('/{chatId}', 'getMessages');
-        //     Route::post('/send/{chatId}', 'sendMessage');
-        //     Route::put('/update/{messageId}', 'updateMessage');
-        //     Route::delete('/delete/{messageId}', 'deleteMessage');
-        // });
-    
-    
-
     
     
     // ----------------- Ride Route ------------------------

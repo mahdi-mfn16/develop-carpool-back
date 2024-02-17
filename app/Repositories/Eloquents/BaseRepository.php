@@ -71,4 +71,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->where($conditions)->first();
     }
+
+    public function toggleStatus($item)
+    {
+        return $item->update(['status' => $item['status']]);
+    }
 }

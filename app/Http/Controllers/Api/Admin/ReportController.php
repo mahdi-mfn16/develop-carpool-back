@@ -34,7 +34,6 @@ class ReportController extends Controller
      *      @OA\Parameter( name="page", description="page", in = "query", @OA\Schema(type="integer") ),
      *      @OA\Parameter( name="limit", description="limit", in = "query", @OA\Schema(type="integer") ),
      *      @OA\Parameter( name="filters[search]", in="query", description="search", @OA\Schema( type="string", example="" ) ),
-     *      @OA\Parameter( name="filters[reported_user_id]", in="query", description="reported user id", @OA\Schema( type="integer", example="" ) ),
      *      @OA\Parameter( name="filters[report_type_id]", in="query", description="report type id", @OA\Schema( type="integer", example="" ) ),     
      *      @OA\Response( response=200, description="successful operation", @OA\MediaType( mediaType="application/json", ) ),
      *      @OA\Response(response=400, description="Bad request"),
@@ -44,7 +43,7 @@ class ReportController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAllReports(IndexReportRequest $request)
+    public function index(IndexReportRequest $request)
     {
         $reports = $this->reportService->getAllReports($request);
         return $this->successPaginateResponse(new ReportCollection($reports));
@@ -57,7 +56,7 @@ class ReportController extends Controller
      * @OA\Get(
      *      path="/api/admin/reports/{reportId}",
      *      operationId="showAdminReports",
-     *      tags={"Admin - Reports"},
+     *      tags={"Admin - Report"},
      *      summary="show one report",
      *      description="show one report",
      *      security={{"bearer_token":{}}},
@@ -83,7 +82,7 @@ class ReportController extends Controller
      * @OA\Delete(
      *      path="/api/admin/reports/{reportId}",
      *      operationId="destroyAdminReport",
-     *      tags={"Admin - Reports"},
+     *      tags={"Admin - Report"},
      *      summary="destroy one report",
      *      description="destroy one report",
      *      security={{"bearer_token":{}}},

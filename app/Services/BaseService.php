@@ -43,4 +43,9 @@ class BaseService
     {
         return $this->repository->delete($id);
     }
+
+    public function toggleStatus($item)
+    {
+        return $item->repository->toggleStatus($item);
+    }
 }

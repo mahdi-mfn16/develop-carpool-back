@@ -19,6 +19,28 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     }
 
 
+    public function getAllReviews($filters, $limit = 10)
+    {
+        $load = [
+            'rate',
+            'user',
+            'reviewedUser',
+        ];
+        $reviews = $this->model->query();
+        $search = isset($filters['search']) ? $filters['search'] : '';
+        $status = (isset($filters['status']) && $filters['status']) ? $filters['status'] : null;
+
+        if($status){
+            $reviews = $reviews->where('status', $status);
+        }
+
+        $reviews = $reviews->where('name', 'like', '%'.$search.'%')
+        ->with($load)->paginate($limit);
+
+        return $reviews;
+    }
+
+
 
     public function getMyGivenReviews($userId, $limit = 10)
     {

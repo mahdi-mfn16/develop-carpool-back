@@ -16,6 +16,15 @@ class ReviewService extends BaseService
     }
 
 
+    public function getAllReviews($request)
+    {
+        $limit = $request->input('limit') ?: 10;
+        $filters = $request->input('filters');
+        return $this->repository->getAllReviews($filters, $limit);
+
+    }
+
+
 
     public function getMyReceivedReviews($request)
     {

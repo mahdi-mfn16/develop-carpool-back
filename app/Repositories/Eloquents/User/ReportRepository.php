@@ -24,13 +24,9 @@ class ReportRepository extends BaseRepository implements ReportRepositoryInterfa
         $reports = $this->model->query();
         $search = isset($filters['search']) ? $filters['search'] : '';
         $reportTypeId = (isset($filters['report_type_id']) && $filters['report_type_id']) ? $filters['report_type_id'] : null;
-        $reportedUserId = (isset($filters['reported_user_id']) && $filters['reported_user_id']) ? $filters['reported_user_id'] : null;
 
         if($reportTypeId){
             $reports = $reports->where('report_type_id', $reportTypeId);
-        }
-        if($reportedUserId){
-            $reports = $reports->where('reported_user_id', $reportedUserId);
         }
 
         $reports = $reports->where('name', 'like', '%'.$search.'%')

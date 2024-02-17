@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Report;
+namespace App\Http\Requests\Review;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexReportRequest extends FormRequest
+class IndexAllReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,8 @@ class IndexReportRequest extends FormRequest
             'limit' => 'sometimes|nullable|numeric',
             'page' => 'sometimes|nullable|numeric',
             'filters' => 'sometimes|array',
-            'filters.report_type_id' => 'sometimes|nullable|numeric|exists:report_types,id',
             'filters.search' => 'sometimes|nullable|string',
+            'filters.status' => 'sometimes|nullable|boolean',
         ];
     }
 }
