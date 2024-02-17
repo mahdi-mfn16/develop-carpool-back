@@ -18,7 +18,7 @@ class ProvinceService extends BaseService
     public function getProvinces($request)
     {
         $filters = $request->input('filters');
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         return $this->repository->getProvinces($filters, $limit);
     }
     

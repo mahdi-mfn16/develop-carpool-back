@@ -4,7 +4,7 @@ namespace App\Http\Requests\NotificationType;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNotificationTypeRequest extends FormRequest
+class IndexNotificationTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class StoreNotificationTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'text' => 'required|string',
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
+            'filters' => 'sometimes|array',
+            'filters.search' => 'sometimes|nullable|string',
         ];
     }
 }

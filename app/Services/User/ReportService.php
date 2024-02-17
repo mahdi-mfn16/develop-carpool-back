@@ -17,7 +17,7 @@ class ReportService extends BaseService
 
     public function getAllReports($request)
     {
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         $filters = $request->input('filters');
         return $this->repository->getAllReports($filters, $limit);
     }

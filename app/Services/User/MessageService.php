@@ -24,7 +24,7 @@ class MessageService extends BaseService
 
     public function getChatMessages($chatId, $request)
     {
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         return $this->repository->getChatMessages($chatId, $limit);
     }
 

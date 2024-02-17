@@ -20,7 +20,7 @@ class ReviewService extends BaseService
     public function getMyReceivedReviews($request)
     {
         $userId = auth('sanctum')->id();
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         return $this->repository->getMyGivenReviews($userId, $limit);
 
     }
@@ -31,7 +31,7 @@ class ReviewService extends BaseService
     public function getMyGivenReviews($request)
     {
         $userId = auth('sanctum')->id();
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         return $this->repository->getMyReceivedReviews($userId, $limit);
 
     }

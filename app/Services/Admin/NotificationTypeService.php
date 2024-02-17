@@ -14,5 +14,13 @@ class NotificationTypeService extends BaseService
         parent::__construct($notificationTypeRepo);
     }
 
+
+    public function getNotificationTypes($request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit') ?: 10;
+        return $this->repository->getNotificationTypes($filters, $limit);
+    }
+
     
 }

@@ -25,32 +25,6 @@ class UserService extends BaseService
 
 
 
-    public function getHomeUsers($user, $request)
-    {
-        $opositeGender = ! $user['gender'];
-        $page = $request->input('page');
-        $limit = $request->input('limit');
-        return $this->repository->getHomeUsers($opositeGender, $page, $limit);
-    }
-
-
-    public function searchUsers($user, $request)
-    {
-        $opositeGender = ! $user['gender'];
-        $filters['city_id'] = $request->input('city_id');
-        $filters['province_id'] = $request->input('province_id');
-        $filters['min_age'] = $request->input('min_age');
-        $filters['max_age'] = $request->input('max_age');
-        $filters['has_profile'] = $request->input('has_profile');
-        $filters['is_online'] = $request->input('is_online');
-
-
-        return $this->repository->searchUsers($opositeGender, $filters);
-    }
-
-
-
-
     public function registerUser($mobile)
     {
         $user = $this->repository->registerUser($mobile);

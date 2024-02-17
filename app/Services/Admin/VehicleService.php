@@ -19,7 +19,7 @@ class VehicleService extends BaseService
     public function getVehicles($request)
     {
         $filters = $request->input('filters');
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         return $this->repository->getVehicles($filters, $limit);
     }
 

@@ -18,14 +18,14 @@ class RideService extends BaseService
 
     public function getMyRides($request)
     {
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         return $this->repository->getMyRides($limit);
     }
 
 
     public function getAllRides($request)
     {
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         $filters = $request->input('filters');
         return $this->repository->getAllRides($limit, $filters);
     }

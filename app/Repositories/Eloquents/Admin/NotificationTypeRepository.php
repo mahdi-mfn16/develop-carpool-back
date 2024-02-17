@@ -24,5 +24,18 @@ class NotificationTypeRepository extends BaseRepository implements NotificationT
         return $this->model->where('name', $type)->first();
     }
 
+
+
+    public function getNotificationTypes($filters, $limit = 10)
+    {
+        $notificationTypes = $this->model->query();
+        $search = isset($filters['search']) ? $filters['search'] : '';
+
+        $notificationTypes = $notificationTypes->where('name', 'like', '%'.$search.'%')
+        ->paginate($limit);
+
+        return $notificationTypes;
+    }
+
     
 }

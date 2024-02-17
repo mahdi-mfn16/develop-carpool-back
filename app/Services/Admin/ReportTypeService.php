@@ -18,7 +18,7 @@ class ReportTypeService extends BaseService
     public function getReportTypes($request)
     {
         $filters = $request->input('filters');
-        $limit = $request->input('limit');
+        $limit = $request->input('limit') ?: 10;
         return $this->repository->getReportTypes($filters, $limit);
     }
 
