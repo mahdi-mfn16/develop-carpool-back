@@ -44,6 +44,7 @@ class ReportTypeController extends Controller
     {
         $types = $this->reportTypeService->indexAllItems();
         return $this->successArrayResponse($types);
+        
     }
 
 
