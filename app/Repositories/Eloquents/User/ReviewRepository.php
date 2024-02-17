@@ -15,14 +15,16 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
 
     public function load()
     {
-        return ['rate'];
+        return [
+            // 'rate'
+        ];
     }
 
 
     public function getAllReviews($filters, $limit = 10)
     {
         $load = [
-            'rate',
+            // 'rate',
             'user',
             'reviewedUser',
         ];
@@ -45,7 +47,7 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     public function getMyGivenReviews($userId, $limit = 10)
     {
        $load = [
-        'rate', 
+        // 'rate', 
         'reviewedUser',
         'ride' => function($q){
             $q->with(['origin', 'destination']);
@@ -61,7 +63,7 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     public function getMyReceivedReviews($userId, $limit = 10)
     {
        $load = [
-        'rate',
+        // 'rate',
         'user', 
         'ride' => function($q){
             $q->with(['origin', 'destination']);

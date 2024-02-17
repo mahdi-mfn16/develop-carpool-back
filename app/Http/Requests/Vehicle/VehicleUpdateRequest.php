@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\UserVehicle;
+namespace App\Http\Requests\Vehicle;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserVehicleIndexRequest extends FormRequest
+class VehicleUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class UserVehicleIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'limit' => 'sometimes|nullable|numeric',
-            'page' => 'sometimes|nullable|numeric',
-            'filters' => 'sometimes|array',
-            'filters.user_id' => 'sometimes|nullable|numeric|exists:users,id',
+            'name' => 'required|string|min:1',    
         ];
     }
 }

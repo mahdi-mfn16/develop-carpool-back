@@ -13,7 +13,7 @@ class FileResource extends JsonResource
         return [
             'id'=> $this->id,
             'name'=> $this->name,
-            'path'=> $this->path,
+            'path'=> config('filesystems.public_root').$this->path,
             'type'=> $this->type,
             'status'=> $this->status,
 

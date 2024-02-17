@@ -74,7 +74,7 @@ class RepositoryServiceProvider extends ServiceProvider
         // $this->app->bind(GatewayRepositoryInterface::class, GatewayRepository::class);
         $this->app->bind(PreferenceRepositoryInterface::class, PreferenceRepository::class);
         $this->app->bind(PreferenceOptionRepositoryInterface::class, PreferenceOptionRepository::class);
-        $this->app->bind(RateRepositoryInterface::class, RateRepository::class);
+        // $this->app->bind(RateRepositoryInterface::class, RateRepository::class);
         $this->app->bind(VehicleRepositoryInterface::class, VehicleRepository::class);
 
 

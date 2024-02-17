@@ -24,14 +24,7 @@ class VehicleStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'origin' => 'required|array',
-            'destination' => 'required|array',
-            'type' => 'required|in:rider,passenger',
-            'date' => 'required|date_format:Y-m-d',
-            'start_time' => 'required|date_format:H:i',
-            'capacity' => 'required|numeric|min:1|max:4',
-            'price' => 'required|numeric|min:0',
-            'description' => 'sometimes|nullable|string',
+            'name' => 'required|string|min:1',    
         ];
     }
 }

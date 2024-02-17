@@ -19,6 +19,26 @@ class UserVehicleRepository extends BaseRepository implements UserVehicleReposit
     }
 
 
+    public function getUserVehicles($filters, $limit = 10)
+    {
+        $load = [
+            'vehicle',
+            'files'
+        ];
+        $vehicles = $this->model->query();
+        $userId = (isset($filters['user_id']) && $filters['user_id']) ? $filters['user_id'] : null;
+        if($userId){
+            $vehicles = $vehicles->where('user_id', $userId);
+        }
+
+        $vehicles = $vehicles
+            ->with($load)
+            ->paginate($limit);
+
+        return $vehicles;
+    }
+
+
 
     public function createUserVehicle($userId, $request)
     {

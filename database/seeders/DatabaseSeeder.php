@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             VehicleSeeder::class,
             PreferenceSeeder::class,
             PreferenceOptionSeeder::class,
-            RateSeeder::class,
+            // RateSeeder::class,
             // GatewaySeeder::class,
             NotificationTypeSeeder::class,
             ReportTypeSeeder::class,

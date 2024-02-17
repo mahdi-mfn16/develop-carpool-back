@@ -19,7 +19,8 @@ class ReviewResource extends JsonResource
             'user'=> UserResource::make($this->whenLoaded('user')),
             'reviewed_user'=> UserResource::make($this->whenLoaded('reviewedUser')),
             'ride'=> RideResource::make($this->whenLoaded('ride')),
-            'rate'=> RateResource::make($this->whenLoaded('rate')),
+            'rate'=> $this->rate,
+            // 'rate'=> RateResource::make($this->whenLoaded('rate')),
             'text'=> $this->text,
             'created_at'=> $this->created_at,
         ];

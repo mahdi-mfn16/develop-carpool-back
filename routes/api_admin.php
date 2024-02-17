@@ -86,6 +86,22 @@ Route::middleware([])->group(function () {
         Route::put('/toggle-status/{reviewId}', 'destroy');
     });
 
+// ----------------- User Vehicle Route ------------------------
+    Route::controller('UserVehicleController')->prefix('vehicles/user')->group(function(){
+        Route::get('/', 'index');
+    });
+
+
+// ----------------- Vehicle Route ------------------------
+    Route::controller('VehicleController')->prefix('vehicles')->group(function(){
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{vehicleId}', 'show');
+        Route::put('/{vehicleId}', 'update');
+        Route::delete('/{vehicleId}', 'destroy');   
+    });
+
+
     // ----------------- User Route ------------------------
         // Route::controller('UserController')->prefix('users')->group(function(){
         //     Route::get('user-info', 'getUserInfo');
@@ -95,20 +111,6 @@ Route::middleware([])->group(function () {
         //     Route::post('/upload-file', 'uploadUserFile');
         //     Route::put('/update-preference/{preference}', 'updateUserPreference');     
         // });
-    
-    
-    // ----------------- User Vehicle Route ------------------------
-        // Route::controller('UserVehicleController')->prefix('vehicles/user')->group(function(){
-        //     Route::post('/', 'createUserVehicle');
-        //     Route::put('/{userVehicleId}', 'updateUserVehicle');
-        //     Route::delete('/{userVehicleId}', 'deleteUserVehicle');
-        //     Route::post('/{userVehicleId}/upload-file', 'uploadVehicleFile');     
-        // });
-    
-
-    
-        
-    
     
     
     

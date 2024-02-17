@@ -15,6 +15,16 @@ class UserVehicleService extends BaseService
     }
 
 
+    public function getUserVehicles($request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit') ?: 10;
+        return $this->repository->getUserVehicles($filters, $limit);
+    }
+
+
+
+
     public function createUserVehicle($userId, $request)
     {
         return $this->repository->createUserVehicle($userId, $request);

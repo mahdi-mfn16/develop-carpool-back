@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\UserVehicle;
 
+use App\Http\Resources\File\FileResource;
 use App\Http\Resources\Vehicle\VehicleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +19,7 @@ class UserVehicleResource extends JsonResource
             'plate_number' => $this->plate_number,
             'status' => $this->status,
             'vehicle' => VehicleResource::make($this->whenLoaded('vehicle')),
+            'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
 }

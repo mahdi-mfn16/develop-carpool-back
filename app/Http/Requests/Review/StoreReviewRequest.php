@@ -24,7 +24,7 @@ class StoreReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'rate_id' => 'required|numeric|exists:rates,id',
+            'rate' => 'required|numeric|in:1,2,3,4,5',
             'reviewed_user_id' => 'required|numeric|exists:users,id',
             'text' => 'sometimes|nullable|string',
         ];

@@ -11,7 +11,8 @@ class Review extends Model
         'user_id',
         'reviewed_user_id',
         'ride_id',
-        'rate_id',
+        // 'rate_id',
+        'rate',
         'text',
         'status',
     ];
@@ -34,8 +35,8 @@ class Review extends Model
         return $this->belongsTo(Ride::class, 'ride_id', 'id');
     }
 
-    public function rate()
-    {
-        return $this->belongsTo(Rate::class, 'rate_id', 'id');
-    }
+    // public function rate()
+    // {
+    //     return $this->belongsTo(Rate::class, 'rate_id', 'id');
+    // }
 }
