@@ -34,6 +34,15 @@ Route::middleware([])->group(function () {
         Route::delete('/{provinceId}', 'destroy');
     });
 
+// ----------------- Report Type Route ------------------------
+    Route::controller('ReportTypeController')->prefix('reports/types')->group(function(){
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{reportTypeId}', 'show');
+        Route::put('/{reportTypeId}', 'update');
+        Route::delete('/{reportTypeId}', 'destroy');
+    });
+
     // ----------------- User Route ------------------------
         // Route::controller('UserController')->prefix('users')->group(function(){
         //     Route::get('user-info', 'getUserInfo');

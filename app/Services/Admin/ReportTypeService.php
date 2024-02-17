@@ -14,5 +14,13 @@ class ReportTypeService extends BaseService
         parent::__construct($reportTypeRepo);
     }
 
+
+    public function getReportTypes($request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit');
+        return $this->repository->getReportTypes($filters, $limit);
+    }
+
     
 }

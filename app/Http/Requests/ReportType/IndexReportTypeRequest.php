@@ -24,8 +24,11 @@ class IndexReportTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'text' => 'required|string',
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
+            'filters' => 'sometimes|array',
+            'filters.search' => 'sometimes|nullable|string',
+            'filters.parent_id' => 'sometimes|nullable|numeric|exists:report_types,id',
         ];
     }
 }

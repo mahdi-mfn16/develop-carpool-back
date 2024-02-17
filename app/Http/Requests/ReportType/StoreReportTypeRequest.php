@@ -26,6 +26,7 @@ class StoreReportTypeRequest extends FormRequest
         return [
             'name' => 'required|string',
             'text' => 'required|string',
+            'parent_id' => 'sometimes|nullable|exists:report_types,id',
         ];
     }
 }
