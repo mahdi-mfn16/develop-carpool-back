@@ -34,6 +34,15 @@ Route::middleware([])->group(function () {
         Route::delete('/{provinceId}', 'destroy');
     });
 
+// ----------------- Notification Type Route ------------------------
+    Route::controller('NotificationTypeController')->prefix('notifications/types')->group(function(){
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{notificationTypeId}', 'show');
+        Route::put('/{notificationTypeId}', 'update');
+        Route::delete('/{notificationTypeId}', 'destroy');
+    });
+
 // ----------------- Report Type Route ------------------------
     Route::controller('ReportTypeController')->prefix('reports/types')->group(function(){
         Route::get('/', 'index');
@@ -41,6 +50,13 @@ Route::middleware([])->group(function () {
         Route::get('/{reportTypeId}', 'show');
         Route::put('/{reportTypeId}', 'update');
         Route::delete('/{reportTypeId}', 'destroy');
+    });
+
+// ----------------- Report Route ------------------------
+    Route::controller('ReportController')->prefix('reports')->group(function(){
+        Route::get('/', 'index');
+        Route::get('/{reportId}', 'show');
+        Route::delete('/{reportId}', 'destroy');
     });
 
     // ----------------- User Route ------------------------
@@ -96,17 +112,7 @@ Route::middleware([])->group(function () {
         // });
     
     
-    
-    
-    // ----------------- Report Route ------------------------
-        // Route::controller('ReportController')->prefix('reports')->group(function(){
-        //     Route::post('/', 'reportUser'); 
-        // });
-    
-    // ----------------- Report Type Route ------------------------
-        // Route::controller('ReportTypeController')->prefix('reports')->group(function(){
-        //     Route::get('types', 'getReportTypes'); 
-        // });
+
     
     
     // ----------------- Ride Route ------------------------

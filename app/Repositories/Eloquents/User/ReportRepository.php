@@ -15,7 +15,7 @@ class ReportRepository extends BaseRepository implements ReportRepositoryInterfa
 
     public function load()
     {
-        return ['reportType'];
+        return ['reportType', 'user', 'reportedUser'];
     }
 
 
