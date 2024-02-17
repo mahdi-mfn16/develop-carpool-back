@@ -52,6 +52,16 @@ Route::middleware([])->group(function () {
         Route::delete('/{reportTypeId}', 'destroy');
     });
 
+
+// ----------------- Preference Route ------------------------
+    Route::controller('PreferenceController')->prefix('preferences')->group(function(){
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{preferenceId}', 'show');
+        Route::put('/{preferenceId}', 'update');
+        Route::delete('/{preferenceId}', 'destroy');
+    });
+
 // ----------------- Report Route ------------------------
     Route::controller('ReportController')->prefix('reports')->group(function(){
         Route::get('/', 'index');

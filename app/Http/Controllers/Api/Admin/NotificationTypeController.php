@@ -101,7 +101,7 @@ class NotificationTypeController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\Put(
      *      path="/api/admin/notifications/types/{notificationTypeId}",
      *      operationId="updateAdminNotificationTypes",
      *      tags={"Admin - Notification Types"},

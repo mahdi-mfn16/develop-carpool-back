@@ -18,5 +18,17 @@ class PreferenceRepository extends BaseRepository implements PreferenceRepositor
         return ['options'];
     }
 
+
+    public function getPreferences($filters, $limit = 10)
+    {
+        $preferences = $this->model->query();
+        $search = isset($filters['search']) ? $filters['search'] : '';
+
+        $preferences = $preferences->where('name', 'like', '%'.$search.'%')
+        ->paginate($limit);
+
+        return $preferences;
+    }
+
     
 }

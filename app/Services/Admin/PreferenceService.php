@@ -14,6 +14,13 @@ class PreferenceService extends BaseService
         parent::__construct($preferenceRepo);
     }
 
+    public function getPreferences($request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit') ?: 10;
+        return $this->repository->getPreferences($filters, $limit);
+    }
+
 
     public function updateUserPreference($user, $preference, $request)
     {

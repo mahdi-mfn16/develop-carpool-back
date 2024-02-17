@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-
+    /**
+     * @OA\Tag( name="Admin - Report", @OA\ExternalDocumentation( description="", url="" ) )
+     */
 
     public function __construct(
         private ReportService $reportService

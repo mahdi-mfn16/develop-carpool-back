@@ -105,7 +105,7 @@ class ReportTypeController extends Controller
 
 
     /**
-     * @OA\Post(
+     * @OA\Put(
      *      path="/api/admin/reports/types/{reportTypeId}",
      *      operationId="updateAdminReportTypes",
      *      tags={"Admin - Report Types"},
