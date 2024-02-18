@@ -108,6 +108,8 @@ Route::middleware([])->group(function () {
     Route::controller('UserController')->prefix('users')->group(function(){
         Route::get('/', 'index');
         Route::get('/{userId}', 'show');
+        Route::put('/update-status/{userId}', 'updateStatus');
+        Route::get('/files/{userId}', 'getUserFiles');
     });
     
     

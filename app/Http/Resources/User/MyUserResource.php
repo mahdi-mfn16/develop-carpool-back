@@ -25,6 +25,8 @@ class MyUserResource extends JsonResource
             'gender' => $this->gender,
             'about_me' => $this->bio_temp,
             'bio_status' => $this->bio_status,
+            'selfie_status' => $this->selfie_status,
+            'drive_license_status' => $this->drive_license_status,
             'status' => $this->status,
             'profile' => $this->getFileUrl('profile', false),
             'preferences' => PreferenceOptionResource::collection($this->whenLoaded('preferenceOptions')),

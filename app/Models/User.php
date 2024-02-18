@@ -30,8 +30,12 @@ class User extends Authenticatable
         'birth_day',
         'gender',
         'about_me',
-        'status', // status  0 => not_verified , 1 => national_code_verified , 2 => car_lisence_verified , 3 => verified , 4 => deactive
-
+        'status', // status  0 => not_verified , 1 => verified
+        'bio_temp',
+        'bio_status', // status 0 => null , 1 => pending , 2 => verified , 3 => rejected 
+        'selfie_status', // status 0 => null , 1 => pending , 2 => verified , 3 => rejected 
+        'drive_license_status', // status 0 => null , 1 => pending , 2 => verified , 3 => rejected 
+      
     ];
 
     /**

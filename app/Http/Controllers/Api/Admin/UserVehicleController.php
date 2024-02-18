@@ -85,7 +85,7 @@ class UserVehicleController extends Controller
     /**
      * @OA\Put(
      *      path="/api/admin/vehicles/user/update-status/{userVehicleId}",
-     *      operationId="updateStatusAdminReview",
+     *      operationId="updateStatusAdminUserVehicle",
      *      tags={"Admin - User Vehicle"},
      *      summary="update status one user vehicle",
      *      description="update status one user vehicle",

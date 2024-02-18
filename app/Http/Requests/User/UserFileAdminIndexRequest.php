@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserAdminIndexRequest extends FormRequest
+class UserFileAdminIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UserAdminIndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,10 +27,7 @@ class UserAdminIndexRequest extends FormRequest
             'limit' => 'sometimes|nullable|numeric',
             'page' => 'sometimes|nullable|numeric',
             'filters' => 'sometimes|array',
-            'filters.search' => 'sometimes|nullable|string',
-            'filters.privilege' => 'sometimes|nullable|numeric|in:0,1,10',
-            'filters.status' => 'sometimes|nullable|numeric|in:0,1,10',
-            'filters.bio_status' => 'sometimes|nullable|numeric|in:0,1,2,3',
+            'filters.type' => 'sometimes|nullable|string|in:profile,drive_license,selfie',
         ];
     }
 }
