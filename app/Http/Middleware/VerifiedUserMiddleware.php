@@ -17,7 +17,7 @@ class VerifiedUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->status != 3){
+        if(Auth::user()->status != 1){
             return response()->json([
                 'status' => 403,
                 'data' => [],

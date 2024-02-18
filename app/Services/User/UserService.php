@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\Classes\SmsSender;
+use App\Events\SendUserNotificationEvent;
 use App\Helpers\Helper;
 use App\Repositories\Interfaces\User\UserRepositoryInterface;
 use App\Services\BaseService;
@@ -10,7 +11,8 @@ use App\Services\BaseService;
 class UserService extends BaseService
 {
     public function __construct(
-        UserRepositoryInterface $userRepo
+        UserRepositoryInterface $userRepo,
+        private NotificationService $notificationService
     )
     {
         parent::__construct($userRepo);
@@ -107,6 +109,43 @@ class UserService extends BaseService
     public function getOneProfile($userId)
     {
         return $this->repository->getOneProfile($userId);
+    }
+
+
+
+    public function updateUserInfoStatus($user, $request)
+    {
+        $action = $request->input('action');
+        $message = $request->input('message');
+        $type = $request->input('type');
+        $this->repository->updateUserInfoStatus($user, $action, $type);
+
+
+        $notif = $this->notificationService->createNotification(
+            $userId = $user['id'],
+            $typeName = $action.'_user_'.$type.'_status',
+            $params = [
+                'message'=> $message,
+            ],
+            
+        );
+
+        event(new SendUserNotificationEvent($notif));
+    }
+
+
+
+    public function getUserFiles($user, $request)
+    {
+        $filters = $request->input('filters');
+        $limit = $request->input('limit') ?: 10;
+        return $this->repository->getUserFiles($user, $filters, $limit);
+    }
+
+
+    public function verifyProfile($file)
+    {
+        $this->repository->verifyProfile($file);   
     }
 
 

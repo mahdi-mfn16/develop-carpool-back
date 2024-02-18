@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateUserStatusRequest;
 use App\Http\Requests\User\UserAdminIndexRequest;
 use App\Http\Requests\User\UserFileAdminIndexRequest;
+use App\Http\Resources\File\FileCollection;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\Models\File;
@@ -105,7 +106,7 @@ class UserController extends Controller
      */
     public function updateStatus(UpdateUserStatusRequest $request, User $user)
     {
-        $this->userService->updateStatus($user, $request);
+        $this->userService->updateUserInfoStatus($user, $request);
         return $this->successJsonResponse();
     }
 
@@ -133,8 +134,8 @@ class UserController extends Controller
      */
     public function getUserFiles(UserFileAdminIndexRequest $request, User $user)
     {
-        $this->userService->getUserFiles($user, $request);
-        return $this->successPaginateResponse();
+        $files = $this->userService->getUserFiles($user, $request);
+        return $this->successPaginateResponse(new FileCollection($files));
     }
 
 
@@ -142,18 +143,13 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/api/admin/users/update-status/{userId}",
-     *      operationId="updateStatusAdminUser",
+     *      path="/api/admin/users/verify-profile/{fileId}",
+     *      operationId="verifyUserProfile",
      *      tags={"Admin - User"},
-     *      summary="update status one user",
-     *      description="update status one user",
+     *      summary="verify user profile",
+     *      description="verify user profile",
      *      security={{"bearer_token":{}}},
-     *      @OA\Parameter( name="userId", description="user id", in = "path", @OA\Schema(type="integer") ),
-     *      @OA\RequestBody(@OA\JsonContent(
-     *        @OA\Property(property="type", description="type", example="selfie,drive_license,bio", @OA\Schema(type="string") ),
-     *        @OA\Property(property="action", description="action", example="accepted,rejected", @OA\Schema(type="string") ),
-     *        @OA\Property(property="message", description="message", example="", @OA\Schema(type="string") ),
-     *      ),),
+     *      @OA\Parameter( name="fileId", description="file id", in = "path", @OA\Schema(type="integer") ),
      *      @OA\Response( response=200, description="successful operation", @OA\MediaType( mediaType="application/json", ) ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),

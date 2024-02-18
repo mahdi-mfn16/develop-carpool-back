@@ -110,6 +110,7 @@ Route::middleware([])->group(function () {
         Route::get('/{userId}', 'show');
         Route::put('/update-status/{userId}', 'updateStatus');
         Route::get('/files/{userId}', 'getUserFiles');
+        Route::put('/verify-profile/{fileId}', 'verifyProfile');
     });
     
     

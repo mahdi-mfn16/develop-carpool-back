@@ -206,6 +206,56 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
 
 
+    public function updateUserInfoStatus($user, $action, $type)
+    {
+        if($user[$type.'_status'] != config('setting.user_'.$type.'_status.accepted')){
+            $user->update([
+                $type.'_status' => config('setting.user_'.$type.'_status.'.$action)
+            ]);
+        }
+
+        $user =  $this->find($user['id']);
+
+        if($type != 'bio' && $user['drive_license_status'] && $user['selfie_status'] &&  !$user['status']){
+            $user->update([
+                'status' => 1
+            ]);
+        }
+
+        
+    }
+
+
+
+    public function getUserFiles($user, $filters, $limit = 10)
+    {
+        $files = $user->files;
+        $type = (isset($filters['type']) && $filters['type']) ? $filters['type'] : null;
+        
+        if($type){
+            $files = $files->where('type', $type);
+        }
+
+        $files = $files->paginate($limit);
+
+        return $files;
+      
+      
+    }
+
+
+    public function verifyProfile($file)
+    {
+        $user = $file->filable;
+
+        $profiles = $user->files->where('type','profile')->values();
+
+        foreach($profiles as $profile){
+            $profile->update(['status', 0]);
+        }
+
+        $file->update(['status', 1]);
+    }
 
     
 
