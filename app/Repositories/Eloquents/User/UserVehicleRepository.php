@@ -15,7 +15,10 @@ class UserVehicleRepository extends BaseRepository implements UserVehicleReposit
 
     public function load()
     {
-        
+        return [
+            'vehicle',
+            'files'
+        ];
     }
 
 
@@ -61,6 +64,17 @@ class UserVehicleRepository extends BaseRepository implements UserVehicleReposit
             'year_model' => $request->input('year_model'),
             'color' => $request->input('color'),
         ]);
+    }
+
+
+    public function updateStatus($userVehicle, $action)
+    {
+        if($userVehicle['status'] != config('setting.user_vehicle_status.accepted')){
+            $userVehicle->update([
+                'status' => config('setting.user_vehicle_status.'.$action)
+            ]);
+        }
+        
     }
 
 

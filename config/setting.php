@@ -28,4 +28,11 @@ return [
         'reject_closed' => 5,
     ],
 
+
+    'user_vehicle_status' => [
+        'pending' => 0,
+        'accepted' => 1, 
+        'rejected' => 2,
+    ],
+
 ];

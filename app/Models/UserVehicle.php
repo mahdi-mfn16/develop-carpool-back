@@ -17,7 +17,7 @@ class UserVehicle extends Model
         'color',
         'year_model',
         'plate_number',
-        'status',
+        'status', // pending => 0, verified => 1, rejected => 2
 
     ];
 

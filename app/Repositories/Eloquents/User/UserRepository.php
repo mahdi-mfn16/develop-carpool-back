@@ -153,20 +153,26 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
 
 
-    public function getUserList($withAdmin)
+    public function getUserList($filters, $limit = 10)
     {
         $users = $this->model->query();
-        if($withAdmin){
-            $users = $users->where('privilege', '!=', config('setting.privilege.admin_user'));
+        $search = isset($filters['search']) ? $filters['search'] : '';
+        $privilege = (isset($filters['privilege']) && $filters['privilege']) ? $filters['privilege'] : null;
+        
+        if($privilege){
+            $users = $users->where('privilege', $privilege);
         }
-        
-        $users = $users->selectRaw("
-        *
-        ")
-        ->orderBy('created_at', 'desc')
-        ->get();
-        
+
+        $users = $users ->where(function($q) use($search){
+            $q->where('name', 'like', '%'.$search.'%')
+            ->orWhere('family', 'like', '%'.$search.'%');
+        })
+        ->with(['files'])
+        ->paginate($limit);
+
         return $users;
+      
+      
     }
 
 

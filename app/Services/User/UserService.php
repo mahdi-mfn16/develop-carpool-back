@@ -18,9 +18,9 @@ class UserService extends BaseService
 
     public function getUserList($request)
     { 
-        $withAdmin = $request['with_admin'];
-        $users = $this->repository->getUserList($withAdmin);
-        return $users;
+        $filters = $request->input('filters');
+        $limit = $request->input('limit') ?: 10;
+        return $this->repository->getUserList($filters, $limit);
     }
 
 

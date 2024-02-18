@@ -24,7 +24,11 @@ class UserAdminIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'with_admin' => 'nullable|boolean',
+            'limit' => 'sometimes|nullable|numeric',
+            'page' => 'sometimes|nullable|numeric',
+            'filters' => 'sometimes|array',
+            'filters.search' => 'sometimes|nullable|string',
+            'filters.privilege' => 'sometimes|nullable|numeric|in:0,1,10',
         ];
     }
 }

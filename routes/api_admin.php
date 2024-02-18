@@ -89,6 +89,8 @@ Route::middleware([])->group(function () {
 // ----------------- User Vehicle Route ------------------------
     Route::controller('UserVehicleController')->prefix('vehicles/user')->group(function(){
         Route::get('/', 'index');
+        Route::get('/', 'show');
+        Route::put('/update-status/{userVehicleId}', 'updateStatus');
     });
 
 
@@ -102,15 +104,11 @@ Route::middleware([])->group(function () {
     });
 
 
-    // ----------------- User Route ------------------------
-        // Route::controller('UserController')->prefix('users')->group(function(){
-        //     Route::get('user-info', 'getUserInfo');
-        //     Route::get('/profile/{user}', 'getUserProfile');
-        //     Route::post('/complete-profile', 'createOrUpdateUserData');
-        //     Route::put('/update-bio', 'updateUserBio');
-        //     Route::post('/upload-file', 'uploadUserFile');
-        //     Route::put('/update-preference/{preference}', 'updateUserPreference');     
-        // });
+ // ----------------- User Route ------------------------
+    Route::controller('UserController')->prefix('users')->group(function(){
+        Route::get('/', 'index');
+        Route::get('/{userId}', 'show');
+    });
     
     
     

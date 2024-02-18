@@ -2,13 +2,15 @@
 
 namespace App\Services\User;
 
+use App\Events\SendUserNotificationEvent;
 use App\Repositories\Interfaces\User\UserVehicleRepositoryInterface;
 use App\Services\BaseService;
 
 class UserVehicleService extends BaseService
 {
     public function __construct(
-        UserVehicleRepositoryInterface $userVehicleRepo
+        UserVehicleRepositoryInterface $userVehicleRepo,
+        private NotificationService $notificationService
     )
     {
         parent::__construct($userVehicleRepo);
@@ -36,6 +38,26 @@ class UserVehicleService extends BaseService
     {
         $this->repository->updateUserVehicle($vehicle, $request);
         return $this->showItem($vehicle['id']);
+    }
+
+
+    public function updateStatus($userVehicle, $request)
+    {
+        $action = $request->input('action');
+        $message = $request->input('message');
+        $this->repository->updateStatus($userVehicle, $action);
+
+
+        $notif = $this->notificationService->createNotification(
+            $userId = $userVehicle['user_id'],
+            $typeName = $action.'_user_vehicle_status',
+            $params = [
+                'message'=> $message,
+            ],
+            
+        );
+
+        event(new SendUserNotificationEvent($notif));
     }
 
 
