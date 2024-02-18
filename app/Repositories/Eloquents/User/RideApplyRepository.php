@@ -16,7 +16,37 @@ class RideApplyRepository extends BaseRepository implements RideApplyRepositoryI
 
     public function load()
     {
+        return [
+            'ride', 
+            'user' => function($q){
+            $q->with(['profile']);
+             }
+        ];
+    }
+
+
+
+    public function getRideApplyList($limit, $filters)
+    {
+        $load = ['ride', 'user' => function($q){
+            $q->with(['profile']);
+        }];
+
+        $status = (isset($filters['status']) && $filters['status']) ? $filters['status'] : null;
+        $rideId = (isset($filters['ride_id']) && $filters['ride_id']) ? $filters['ride_id'] : null;
+   
+        $applies = $this->model->query();
+            
+        if($status){
+            $applies = $applies->where('status', $status);
+        }
         
+        if($rideId){
+            $applies = $applies->where('ride_id', $rideId);
+        }
+        $applies = $applies->with($load)->paginate($limit);
+
+        return $applies;
     }
 
 

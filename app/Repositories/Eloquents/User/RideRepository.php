@@ -56,6 +56,37 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
     }
 
 
+
+    public function getAdminRideList($limit, $filters)
+    {
+        $load = ['origin', 'destination', 'user' => function($q){
+            $q->with(['profile']);
+        }];
+
+        $origin = (isset($filters['origin']) && $filters['origin']) ? $filters['origin'] : null;
+        $destination = (isset($filters['destination']) && $filters['destination']) ? $filters['destination'] : null;
+        $userId = (isset($filters['user_id']) && $filters['user_id']) ? $filters['user_id'] : null;
+   
+        $rides = $this->model->query();
+            
+        if($origin){
+            $rides = $rides->where('origin_city_id', $origin);
+        }
+        if($destination){
+            $rides = $rides->where('destination_city_id', $destination);
+        }
+        if($userId){
+            $rides = $rides->where('user_id', $userId);
+        }
+        $rides = $rides->with($load)->paginate($limit);
+
+        return $rides;
+    }
+
+
+    
+
+
     
 
     

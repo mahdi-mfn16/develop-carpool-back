@@ -27,7 +27,6 @@ class IndexRideApplyRequest extends FormRequest
             'limit' => 'sometimes|nullable|numeric',
             'page' => 'sometimes|nullable|numeric',
             'filters' => 'sometimes|array',
-            'filters.province' => 'sometimes|nullable|numeric|exists:provinces,id',
             'filters.search' => 'sometimes|nullable|string',
         ];
     }

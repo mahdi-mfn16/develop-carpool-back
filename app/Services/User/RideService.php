@@ -31,6 +31,14 @@ class RideService extends BaseService
     }
 
 
+    public function getAdminRideList($request)
+    {
+        $limit = $request->input('limit') ?: 10;
+        $filters = $request->input('filters');
+        return $this->repository->getAdminRideList($limit, $filters);
+    }
+
+
     public function createRide($request)
     { 
 

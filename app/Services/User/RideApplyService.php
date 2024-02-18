@@ -194,6 +194,15 @@ class RideApplyService extends BaseService
     }
 
 
+
+    public function getRideApplyList($request)
+    {
+        $limit = $request->input('limit') ?: 10;
+        $filters = $request->input('filters');
+        return $this->repository->getRideApplyList($limit, $filters);
+    }
+
+
  
    
     
