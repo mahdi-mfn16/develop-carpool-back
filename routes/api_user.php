@@ -120,12 +120,6 @@ Route::middleware([])->group(function () {
     });
 
 
-// ----------------- User Route ------------------------
-    Route::controller('UserController')->prefix('users')->group(function(){
-        Route::post('/send-code', 'sendCode');
-        Route::post('/check-code', 'checkUserCode');
-        
-    });
 
 // ----------------- Ride Route ------------------------
     Route::controller('RideController')->prefix('rides')->group(function(){

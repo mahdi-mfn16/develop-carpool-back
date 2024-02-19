@@ -35,6 +35,9 @@ Route::middleware([])->group(function () {
     // ----------------- Auth Route ------------------------
     Route::controller('AuthController')->prefix('auth')->group(function(){
         Route::post('login', 'login');
+        Route::post('/send-code', 'sendCode');
+        Route::post('/check-code', 'checkUserCode');
+        
 
     });
     

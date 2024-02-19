@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\User\CheckCodeRequest;
+use App\Http\Requests\User\RegisterUserRequest;
 use App\Repositories\Interfaces\User\UserRepositoryInterface;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
@@ -121,4 +123,98 @@ class AuthController extends Controller
     {
         $request->user()->tokens()->delete();
     }
+
+
+
+      /**
+     * @OA\Post(
+     *      path="/api/auth/send-code",
+     *      operationId="sendCode",
+     *      tags={"Auth"},
+     *      summary="send code again",
+     *      description="send code again",
+     *      security={{"bearer_token":{}}},
+     *    @OA\RequestBody(
+     *    @OA\JsonContent(
+     *      @OA\Property(
+     *          property="mobile",
+     *          description="mobile",
+     *          example="09156326123",
+     *          @OA\Schema(type="string")
+     *          )
+     *     ),
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\MediaType(
+     *               mediaType="application/json",
+     *          )
+     *
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=401, description="Unauthorized"),
+     *     )
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+     public function sendCode(RegisterUserRequest $request)
+     {      
+         $this->userService->sendCode($request['mobile']);
+         return $this->successJsonResponse();     
+     }
+ 
+ 
+ 
+     /**
+      * @OA\Post(
+      *      path="/api/auth/check-code",
+      *      operationId="checkUserCode",
+      *      tags={"Auth"},
+      *      summary="check user code",
+      *      description="check user code",
+      *      security={{"bearer_token":{}}},
+      *    @OA\RequestBody(
+      *    @OA\JsonContent(
+      *      @OA\Property(
+      *          property="mobile",
+      *          description="mobile",
+      *          example="09156326123",
+      *          @OA\Schema(type="string")
+      *          ),
+      *      @OA\Property(
+      *          property="code",
+      *          description="code",
+      *          example="12345",
+      *          @OA\Schema(type="string")
+      *          ),
+      *     ),
+      *     ),
+      *      @OA\Response(
+      *          response=200,
+      *          description="successful operation",
+      *          @OA\MediaType(
+      *               mediaType="application/json",
+      *          )
+      *
+      *       ),
+      *       @OA\Response(response=400, description="Bad request"),
+      *      @OA\Response(response=404, description="Resource Not Found"),
+      *      @OA\Response(response=401, description="Unauthorized"),
+      *     )
+      * @param Request $request
+      * @return \Illuminate\Http\JsonResponse
+      */
+ 
+     public function checkUserCode(CheckCodeRequest $request)
+     {
+         $info = $this->userService->checkUserCode($request['mobile'], $request['code']);
+ 
+         return $this->successJsonResponse([
+             'token' => $info['token'],
+             'user' => $info['user']
+         ]);
+     }
 }
