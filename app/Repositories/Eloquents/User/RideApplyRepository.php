@@ -47,6 +47,7 @@ class RideApplyRepository extends BaseRepository implements RideApplyRepositoryI
         $applies = $applies->with($load)->paginate($limit);
 
         return $applies;
+        
     }
 
 
