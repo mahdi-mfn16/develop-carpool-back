@@ -2924,7 +2924,7 @@
                 },
                 "security": [
                     {
-                        "bearer_token": []
+                        "bearer": []
                     }
                 ]
             }
@@ -2975,7 +2975,7 @@
                 },
                 "security": [
                     {
-                        "bearer_token": []
+                        "bearer": []
                     }
                 ]
             }

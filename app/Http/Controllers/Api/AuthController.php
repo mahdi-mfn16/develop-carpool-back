@@ -133,7 +133,7 @@ class AuthController extends Controller
      *      tags={"Auth"},
      *      summary="send code again",
      *      description="send code again",
-     *      security={{"bearer_token":{}}},
+     *      security={{"bearer":{}}},
      *    @OA\RequestBody(
      *    @OA\JsonContent(
      *      @OA\Property(
@@ -175,7 +175,7 @@ class AuthController extends Controller
       *      tags={"Auth"},
       *      summary="check user code",
       *      description="check user code",
-      *      security={{"bearer_token":{}}},
+      *      security={{"bearer":{}}},
       *    @OA\RequestBody(
       *    @OA\JsonContent(
       *      @OA\Property(
