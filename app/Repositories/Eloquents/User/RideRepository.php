@@ -35,11 +35,13 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
         $sub = $this->model->where('origin_city_id', $filters['origin'])
             ->where('destination_city_id', $filters['destination'])
             ->where('date', $filters['date'])
+            ->where('type', $filters['type'])
             ->selectRaw('id, (capacity - booked) as empty');
         
         $rides = $this->model->where('rides.origin_city_id', $filters['origin'])
             ->where('rides.destination_city_id', $filters['destination'])
             ->where('rides.date', $filters['date'])
+            ->where('rides.type', $filters['type'])
             ->joinSub($sub, 'sub', function($q) use($filters){
                 $q->on('sub.id', '=', 'rides.id');
                 $q->where('sub.empty', '>=', $filters['capacity']);
@@ -49,6 +51,9 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
             $rides = $rides->whereHas('user', function($q) use($filters){
                 $q->where('gender', $filters['gender']);
             });
+        }
+        if($filters['type']){
+            $rides = $rides->where('type', $filters['type']);
         }
         $rides = $rides->with($load)->paginate($limit);
 

@@ -31,7 +31,9 @@ class RideIndexRequest extends FormRequest
             'filters.destination' => 'required|numeric|exists:cities,id',
             'filters.capacity' => 'required|numeric|min:1',
             'filters.date' => 'required|date_format:Y-m-d',
+            'filters.type' => 'required|string|in:passenger,rider',
             'filters.gender' => 'sometimes|nullable|in:0,1',
+            
         ];
     }
 }
