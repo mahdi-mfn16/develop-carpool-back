@@ -138,6 +138,15 @@ class RideController extends Controller
     *         )
     *     ),
     *     @OA\Parameter(
+    *         name="filters[type]",
+    *         in="query",
+    *         description="type",
+    *         required=true,
+    *         @OA\Schema(
+    *             type="string",
+    *             example="passenger, rider"
+    *         )),
+    *     @OA\Parameter(
     *         name="filters[gender]",
     *         in="query",
     *         description="gender",

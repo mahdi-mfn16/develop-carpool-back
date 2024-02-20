@@ -3919,6 +3919,16 @@
                         }
                     },
                     {
+                        "name": "filters[type]",
+                        "in": "query",
+                        "description": "type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "passenger, rider"
+                        }
+                    },
+                    {
                         "name": "filters[gender]",
                         "in": "query",
                         "description": "gender",

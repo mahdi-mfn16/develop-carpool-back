@@ -19,7 +19,7 @@ class RideApplyRepository extends BaseRepository implements RideApplyRepositoryI
         return [
             'ride', 
             'user' => function($q){
-            $q->with(['profile']);
+            $q->with(['files']);
              }
         ];
     }
@@ -29,7 +29,7 @@ class RideApplyRepository extends BaseRepository implements RideApplyRepositoryI
     public function getRideApplyList($limit, $filters)
     {
         $load = ['ride', 'user' => function($q){
-            $q->with(['profile']);
+            $q->with(['files']);
         }];
 
         $status = (isset($filters['status']) && $filters['status']) ? $filters['status'] : null;

@@ -29,7 +29,7 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
     public function getAllRides($limit, $filters)
     {
         $load = ['origin', 'destination', 'user' => function($q){
-            $q->with(['profile']);
+            $q->with(['files']);
         }];
 
         $sub = $this->model->where('origin_city_id', $filters['origin'])
@@ -47,7 +47,7 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
                 $q->where('sub.empty', '>=', $filters['capacity']);
             });
 
-        if($filters['gender']){
+        if(isset($filters['gender']) && !is_null($filters['gender'])){
             $rides = $rides->whereHas('user', function($q) use($filters){
                 $q->where('gender', $filters['gender']);
             });
@@ -65,7 +65,7 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
     public function getAdminRideList($limit, $filters)
     {
         $load = ['origin', 'destination', 'user' => function($q){
-            $q->with(['profile']);
+            $q->with(['files']);
         }];
 
         $origin = (isset($filters['origin']) && $filters['origin']) ? $filters['origin'] : null;
