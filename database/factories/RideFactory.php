@@ -18,7 +18,7 @@ class RideFactory extends Factory
     public function definition()
     {
         $users = User::all()->pluck('id')->values()->toArray();
-        $cities = City::all()->pluck('id')->values()->toArray();
+        $cities = City::whereIn('name', ['رشت','تهران','زنجان','لاهیجان'])->pluck('id')->values()->toArray();
         $types = ['rider', 'passenger'];
         return [
             'user_id' => $users[array_rand($users)],
@@ -33,7 +33,8 @@ class RideFactory extends Factory
             'destination_lng' => $this->faker->longitude(),
             'destination_lat' => $this->faker->latitude(),
             'distance' => rand(50, 100),
-            'date' => $this->faker->date('Y-m-d').' 00:00:00',
+            // 'date' => $this->faker->date('Y-m-d').' 00:00:00',
+            'date' => '2024-04-'.rand(1,10).' 00:00:00',
             'start_time' => $this->faker->date('h:i'),
             'end_time' => $this->faker->date('h:i'),
             'price' => rand(10,20),

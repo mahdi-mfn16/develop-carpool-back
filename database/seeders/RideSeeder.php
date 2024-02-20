@@ -15,6 +15,10 @@ class RideSeeder extends Seeder
      */
     public function run()
     {
+        if(collect(Ride::all())->count() != 0){
+            Ride::getQuery()->delete();
+        }
+
         Ride::factory()
             ->count(20)
             ->create();
