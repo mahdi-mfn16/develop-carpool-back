@@ -15,7 +15,7 @@ class RateRepository extends BaseRepository implements RateRepositoryInterface
 
     public function load()
     {
-        
+        return [];    
     }
 
  

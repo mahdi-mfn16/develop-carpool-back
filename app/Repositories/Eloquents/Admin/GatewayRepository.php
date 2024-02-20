@@ -15,7 +15,7 @@ class GatewayRepository extends BaseRepository implements GatewayRepositoryInter
 
     public function load()
     {
-        
+        return [];    
     }
 
 

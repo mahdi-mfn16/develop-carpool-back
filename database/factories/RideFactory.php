@@ -21,6 +21,7 @@ class RideFactory extends Factory
         $cities = City::whereIn('name', ['رشت','تهران','زنجان','لاهیجان'])->pluck('id')->values()->toArray();
         $types = ['rider', 'passenger'];
         $address = ['خیابان اصلی شهر','میدان شماره یک','خیابان آزادی','میدان مادر', 'محله تستی', 'پل روگذر جنوب'];
+        
         return [
             'user_id' => $users[array_rand($users)],
             'origin_city_id' => $cities[array_rand($cities)],

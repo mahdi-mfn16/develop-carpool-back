@@ -15,7 +15,7 @@ class NotificationTypeRepository extends BaseRepository implements NotificationT
 
     public function load()
     {
-        
+        return [];    
     }
 
 

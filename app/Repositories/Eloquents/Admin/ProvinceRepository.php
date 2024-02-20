@@ -15,7 +15,7 @@ class ProvinceRepository extends BaseRepository implements ProvinceRepositoryInt
 
     public function load()
     {
-        
+        return [];    
     }
 
 

@@ -17,7 +17,7 @@ class FileRepository extends BaseRepository implements FileRepositoryInterface
 
     public function load()
     {
-        
+        return [];    
     }
 
 

@@ -15,7 +15,7 @@ class PaymentRepository extends BaseRepository implements PaymentRepositoryInter
 
     public function load()
     {
-        
+        return [];    
     }
 
 
