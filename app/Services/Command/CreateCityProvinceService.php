@@ -4,6 +4,7 @@ namespace App\Services\Command;
 
 use App\Models\City;
 use App\Models\Province;
+use App\Models\Ride;
 use App\Repositories\Interfaces\Admin\CityRepositoryInterface;
 use App\Repositories\Interfaces\Admin\ProvinceRepositoryInterface;
 use App\Services\BaseService;
@@ -29,6 +30,8 @@ class CreateCityProvinceService extends BaseService
         try {
             $provinces = collect(json_decode(File::get(base_path('provinces.json'))));
             DB::beginTransaction();
+            Ride::getQuery()->delete();
+            City::getQuery()->delete();
             Province::getQuery()->delete();
             foreach($provinces as $province){
                 Province::create([
@@ -52,6 +55,7 @@ class CreateCityProvinceService extends BaseService
             $provinces = collect(json_decode(File::get(base_path('provinces.json'))));
             $cities = collect(json_decode(File::get(base_path('cities.json'))));
             DB::beginTransaction();
+            Ride::getQuery()->delete();
             City::getQuery()->delete();
             foreach($cities as $city){
                 $province = $provinces->where('id', $city->province_id)->first();

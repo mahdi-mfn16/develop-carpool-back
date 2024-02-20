@@ -20,14 +20,15 @@ class RideFactory extends Factory
         $users = User::all()->pluck('id')->values()->toArray();
         $cities = City::whereIn('name', ['رشت','تهران','زنجان','لاهیجان'])->pluck('id')->values()->toArray();
         $types = ['rider', 'passenger'];
+        $address = ['خیابان اصلی شهر','میدان شماره یک','خیابان آزادی','میدان مادر', 'محله تستی', 'پل روگذر جنوب'];
         return [
             'user_id' => $users[array_rand($users)],
             'origin_city_id' => $cities[array_rand($cities)],
             'destination_city_id' => $cities[array_rand($cities)],
             'capacity' => rand(2,4),
             'booked' => 0,
-            'origin_address' => $this->faker->address(),
-            'destination_address' => $this->faker->address(),
+            'origin_address' => $address[array_rand($address)],
+            'destination_address' => $address[array_rand($address)],
             'origin_lng' => $this->faker->longitude(),
             'origin_lat' => $this->faker->latitude(),
             'destination_lng' => $this->faker->longitude(),
