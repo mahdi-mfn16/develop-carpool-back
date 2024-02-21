@@ -71,17 +71,12 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-
-
 // ----------------- Report Route ------------------------
     Route::controller('ReportController')->middleware(['verified_user'])->prefix('reports')->group(function(){
         Route::post('/', 'reportUser'); 
     });
 
-// ----------------- Report Type Route ------------------------
-    Route::controller('ReportTypeController')->prefix('reports')->group(function(){
-        Route::get('types', 'getReportTypes'); 
-    });
+
 
 
 // ----------------- Ride Route ------------------------
@@ -131,6 +126,11 @@ Route::middleware([])->group(function () {
     Route::controller('VehicleController')->prefix('vehicles')->group(function(){
         Route::get('/', 'getVehicles');
         
+    });
+
+// ----------------- Report Type Route ------------------------
+    Route::controller('ReportTypeController')->prefix('reports/types')->group(function(){
+        Route::get('/', 'getReportTypes'); 
     });
     
 });

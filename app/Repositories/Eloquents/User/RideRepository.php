@@ -32,21 +32,19 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
             $q->with(['files']);
         }];
 
-        // $sub = $this->model->where('origin_city_id', $filters['origin'])
-        //     ->where('destination_city_id', $filters['destination'])
-        //     ->where('date', $filters['date'])
-        //     ->where('type', $filters['type'])
-        //     ->selectRaw('id, (capacity - booked) as empty');
+
         
         $rides = $this->model->where('rides.origin_city_id', $filters['origin'])
             ->where('rides.destination_city_id', $filters['destination'])
             ->where('rides.date', $filters['date'])
-            ->where('rides.type', $filters['type'])
-            ->whereRaw("(capacity - booked) >= ". $filters['capacity']."");
-            // ->joinSub($sub, 'sub', function($q) use($filters){
-                // $q->on('sub.id', '=', 'rides.id');
-                // $q->where('sub.empty', '>=', $filters['capacity']);
-            // });
+            ->where('rides.type', $filters['type']);
+        if($filters['type'] == 'rider'){
+            $rides = $rides->whereRaw("(capacity - booked) >= ". $filters['capacity']."");
+        }else{ // passenger
+            $rides = $rides->whereRaw("(capacity - booked) > 0 and (capacity - booked) <= ". $filters['capacity']."");
+        }
+           
+
 
         if(isset($filters['gender']) && !is_null($filters['gender'])){
             $rides = $rides->whereHas('user', function($q) use($filters){

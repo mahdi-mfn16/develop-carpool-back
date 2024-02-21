@@ -37,8 +37,8 @@ class RideApplyController extends Controller
      *      path="/api/rides/apply/{rideId}",
      *      operationId="sendRideApply",
      *      tags={"Ride Apply"},
-     *      summary="create a review",
-     *      description="create a review",
+     *      summary="create a ride apply",
+     *      description="create a ride apply",
      *      security={{"bearer_token":{}}},
      *      @OA\Parameter(
      *         name="rideId",
