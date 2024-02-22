@@ -3692,8 +3692,8 @@
                 "tags": [
                     "Ride Apply"
                 ],
-                "summary": "create a review",
-                "description": "create a review",
+                "summary": "create a ride apply",
+                "description": "create a ride apply",
                 "operationId": "sendRideApply",
                 "parameters": [
                     {
@@ -3963,14 +3963,14 @@
                 ]
             }
         },
-        "/api/users/user-info": {
+        "/api/users/my-info": {
             "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "get auth user",
                 "description": "get auth user ",
-                "operationId": "getUserInfo",
+                "operationId": "getMyInfo",
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -3991,6 +3991,48 @@
                 "security": [
                     {
                         "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/users/user-info/{userId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "get one user",
+                "description": "get one user ",
+                "operationId": "getUserInfo",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "user id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
                     }
                 ]
             }

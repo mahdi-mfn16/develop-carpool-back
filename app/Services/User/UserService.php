@@ -32,7 +32,7 @@ class UserService extends BaseService
         $user = $this->repository->registerUser($mobile);
 
         $code = Helper::generateSmsCode();
-        SmsSender::sendSms($mobile, $code, 'register_user');
+        SmsSender::sendSms('authMessage', $mobile, ['token' => $code]);
         
         $this->repository->updateUserCode($mobile, $code);
 
@@ -45,7 +45,7 @@ class UserService extends BaseService
     {
         
         $code = Helper::generateSmsCode();
-        SmsSender::sendSms($mobile, $code, 'register_user');
+        SmsSender::sendSms('authMessage', $mobile, ['token' => $code]);
         
         $this->repository->updateUserCode($mobile, $code);
 
@@ -87,7 +87,7 @@ class UserService extends BaseService
             return false;
         }
         $code = Helper::generateSmsCode();
-        SmsSender::sendSms($mobile, $code, 'forget_password');
+        SmsSender::sendSms('forgetPasswordMessage', $mobile, ['token' => $code]);
 
         return true;
     }

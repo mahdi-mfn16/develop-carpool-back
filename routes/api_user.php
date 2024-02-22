@@ -20,8 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // ----------------- User Route ------------------------
     Route::controller('UserController')->prefix('users')->group(function(){
-        Route::get('user-info', 'getUserInfo');
-        Route::get('/profile/{user}', 'getUserProfile');
+        Route::get('my-info', 'getMyInfo');
         Route::post('/complete-profile', 'createOrUpdateUserData');
         Route::put('/update-bio', 'updateUserBio');
         Route::post('/upload-file', 'uploadUserFile');
@@ -32,9 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
 // ----------------- User Vehicle Route ------------------------
     Route::controller('UserVehicleController')->middleware(['verified_user'])->prefix('vehicles/user')->group(function(){
         Route::post('/', 'createUserVehicle');
-        Route::put('/{userVehicleId}', 'updateUserVehicle');
-        Route::delete('/{userVehicleId}', 'deleteUserVehicle');
-        Route::post('/{userVehicleId}/upload-file', 'uploadVehicleFile');     
+        Route::put('/{userVehicle}', 'updateUserVehicle');
+        Route::delete('/{userVehicle}', 'deleteUserVehicle');
+        Route::post('/{userVehicle}/upload-file', 'uploadVehicleFile');     
     });
 
 
@@ -48,7 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller('ReviewController')->prefix('reviews')->group(function(){
         Route::get('/received', 'getMyReceivedReviews');
         Route::get('/given', 'getMyGivenReviews');
-        Route::post('/{rideId}', 'createReview')->middleware(['verified_user']);
+        Route::post('/{ride}', 'createReview')->middleware(['verified_user']);
     });
 
 
@@ -58,16 +57,16 @@ Route::middleware('auth:sanctum')->group(function () {
 // ----------------- Chat Route ------------------------
     Route::controller('ChatController')->prefix('chats')->group(function(){
         Route::get('/', 'getChatList');
-        Route::get('/{chatId}', 'showChat');
-        Route::delete('/{chatId}', 'deleteChat')->middleware(['verified_user']);
+        Route::get('/{chat}', 'showChat');
+        Route::delete('/{chat}', 'deleteChat')->middleware(['verified_user']);
     });
 
 // ----------------- Message Route ------------------------
     Route::controller('MessageController')->middleware(['verified_user'])->prefix('messages')->group(function(){
-        Route::get('/{chatId}', 'getMessages');
-        Route::post('/send/{chatId}', 'sendMessage');
-        Route::put('/update/{messageId}', 'updateMessage');
-        Route::delete('/delete/{messageId}', 'deleteMessage');
+        Route::get('/{chat}', 'getMessages');
+        Route::post('/send/{chat}', 'sendMessage');
+        Route::put('/update/{message}', 'updateMessage');
+        Route::delete('/delete/{message}', 'deleteMessage');
     });
 
 
@@ -88,8 +87,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // ----------------- Ride Apply Route ------------------------
     Route::controller('RideApplyController')->middleware(['verified_user'])->prefix('rides/apply')->group(function(){
-        Route::post('/{rideId}', 'sendRideApply');
-        Route::put('/status/{rideApplyId}', 'updateRideApplyStatus');
+        Route::post('/{ride}', 'sendRideApply');
+        Route::put('/status/{rideApply}', 'updateRideApplyStatus');
         
     });
     
@@ -108,6 +107,13 @@ Route::middleware([])->group(function () {
     Route::controller('ProvinceController')->prefix('provinces')->group(function(){
         Route::get('/', 'index');
     });
+
+
+// ----------------- User Route ------------------------
+    Route::controller('UserController')->prefix('users')->group(function(){
+        Route::get('/user-info/{user}', 'getUserInfo');
+    });
+
 
 // ----------------- City Route ------------------------
     Route::controller('CityController')->prefix('cities')->group(function(){

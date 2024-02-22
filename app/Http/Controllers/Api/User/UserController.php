@@ -44,8 +44,8 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/users/user-info",
-     *      operationId="getUserInfo",
+     *      path="/api/users/my-info",
+     *      operationId="getMyInfo",
      *      tags={"User"},
      *      summary="get auth user",
      *      description="get auth user ",
@@ -66,13 +66,46 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function getUserInfo()
+    public function getMyInfo()
     {
         $userId = auth('sanctum')->id();
         $user = $this->userService->showItem($userId);
         return $this->successJsonResponse(MyUserResource::make($user));
     }
 
+
+
+
+      /**
+     * @OA\Get(
+     *      path="/api/users/user-info/{userId}",
+     *      operationId="getUserInfo",
+     *      tags={"User"},
+     *      summary="get one user",
+     *      description="get one user ",
+     *      security={{"bearer":{}}},
+     *      @OA\Parameter( name="userId", description="user id", in = "path", @OA\Schema(type="integer") ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\MediaType(
+     *               mediaType="application/json",
+     *          )
+     *
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=401, description="Unauthorized"),
+     *     )
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+     public function getUserInfo(User $user)
+     {
+        $user = $this->userService->showItem($user['id']);
+        return $this->successJsonResponse(UserResource::make($user));
+     }
 
 
   
