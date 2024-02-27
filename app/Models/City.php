@@ -12,6 +12,8 @@ class City extends Model
     protected $fillable = [
         'name',
         'province_id',
+        'lat',
+        'lng',
     ];
 
     public function province()

@@ -38,7 +38,8 @@ class CreateProvinces extends Command
     {
         try {
             Log::info('start create:province at '.now());
-            $result = $this->createCityProvinceService->createProvince();
+            // $result = $this->createCityProvinceService->createProvince();
+            $result = $this->createCityProvinceService->createProvinceBehzi();
             Log::info('finished create:province at '.now());
         } catch (Exception $e) {
             Log::info('error in create:province at '.now());

@@ -76,5 +76,63 @@ class CreateCityProvinceService extends BaseService
 
     }
 
+
+    public function createProvinceBehzi()
+    {
+        
+        try {
+            $provinces = collect(json_decode(File::get(base_path('provinces_behzi.json'))))->sortBy('name')->values();
+            DB::beginTransaction();
+            Ride::getQuery()->delete();
+            City::getQuery()->delete();
+            Province::getQuery()->delete();
+            foreach($provinces as $province){
+                Province::create([
+                    'name' => $province->name,
+                    'lat' => $province->latitude,
+                    'lng' => $province->longitude
+                ]);
+            }
+            DB::commit();
+        } catch (Exception $th) {
+            DB::rollBack();
+            Log::info($th);
+        }
+       
+       
+    }
+
+
+
+    public function createCityBehzi()
+    {
+       
+        try {
+            $provinces = collect(json_decode(File::get(base_path('provinces_behzi.json'))));
+            $cities = collect(json_decode(File::get(base_path('cities_behzi.json'))))->sortBy('name')->values();
+            DB::beginTransaction();
+            Ride::getQuery()->delete();
+            City::getQuery()->delete();
+            foreach($cities as $city){
+                $province = $provinces->where('id', $city->state_id)->first();
+                $province = Province::where('name', $province->name)->first();
+                City::create([
+                    'name' => $city->name,
+                    'province_id' => $province['id'],
+                    'lat' => $city->latitude,
+                    'lng' => $city->longitude
+                ]);
+            }
+            DB::commit();
+        } catch (Exception $th) {
+            DB::rollBack();
+            Log::info($th);
+        }
+
+        
+
+
+    }
+
     
 }

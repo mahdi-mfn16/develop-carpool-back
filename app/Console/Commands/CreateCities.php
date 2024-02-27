@@ -38,7 +38,8 @@ class CreateCities extends Command
     {
         try {
             Log::info('start create:city at '.now());
-            $result = $this->createCityProvinceService->createCity();
+            // $result = $this->createCityProvinceService->createCity();
+            $result = $this->createCityProvinceService->createCityBehzi();
             Log::info('finished create:city at '.now());
         } catch (Exception $e) {
             Log::info('error in create:city at '.now());
