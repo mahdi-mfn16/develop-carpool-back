@@ -15,7 +15,7 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
 
     public function load()
     {
-        return [];
+        return ['direction'];
     }
 
 

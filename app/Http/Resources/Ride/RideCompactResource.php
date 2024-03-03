@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Ride;
 
 use App\Http\Resources\City\CityResource;
+use App\Http\Resources\Direction\DirectionResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
@@ -18,6 +19,7 @@ class RideCompactResource extends JsonResource
             'user'=> UserResource::make($this->whenLoaded('user')),
             'origin'=> CityResource::make($this->whenLoaded('origin')),
             'destination'=> CityResource::make($this->whenLoaded('destination')),
+            'direction'=> DirectionResource::make($this->whenLoaded('direction')),
             'type'=> $this->type,
             'distance'=> $this->distance,
             'date'=> Carbon::parse($this->date)->format('Y-m-d'),

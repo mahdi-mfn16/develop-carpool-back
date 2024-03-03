@@ -13,6 +13,7 @@ use App\Repositories\Eloquents\Admin\ReportTypeRepository;
 use App\Repositories\Eloquents\Admin\VehicleRepository;
 use App\Repositories\Eloquents\BaseRepository;
 use App\Repositories\Eloquents\User\ChatRepository;
+use App\Repositories\Eloquents\User\DirectionRepository;
 use App\Repositories\Eloquents\User\FileRepository;
 use App\Repositories\Eloquents\User\MessageRepository;
 use App\Repositories\Eloquents\User\NotificationRepository;
@@ -34,6 +35,7 @@ use App\Repositories\Interfaces\Admin\ReportTypeRepositoryInterface;
 use App\Repositories\Interfaces\Admin\VehicleRepositoryInterface;
 use App\Repositories\Interfaces\BaseRepositoryInterface;
 use App\Repositories\Interfaces\User\ChatRepositoryInterface;
+use App\Repositories\Interfaces\User\DirectionRepositoryInterface;
 use App\Repositories\Interfaces\User\FileRepositoryInterface;
 use App\Repositories\Interfaces\User\MessageRepositoryInterface;
 use App\Repositories\Interfaces\User\NotificationRepositoryInterface;
@@ -88,6 +90,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
         $this->app->bind(ChatRepositoryInterface::class, ChatRepository::class);
         $this->app->bind(UserVehicleRepositoryInterface::class, UserVehicleRepository::class);
+        $this->app->bind(DirectionRepositoryInterface::class, DirectionRepository::class);
         // $this->app->bind(PaymentRepositoryInterface::class, PaymentRepository::class);
 
         

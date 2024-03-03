@@ -61,4 +61,9 @@ class Ride
     {
         return $this->belongsTo(Review::class, 'ride_id', 'id');
     }
+
+    public function direction()
+    {
+        return $this->hasOne(Direction::class, 'ride_id', 'id');
+    }
 }
