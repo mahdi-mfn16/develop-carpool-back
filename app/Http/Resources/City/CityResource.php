@@ -17,6 +17,7 @@ class CityResource extends JsonResource
             'name'=> $this->name,
             'lat' => $this->lat,
             'lng' => $this->lng,
+            'bounding_box' => unserialize($this->bounding_box),
             'province' => ProvinceResource::make($this->whenLoaded('province')),
         ];
     }

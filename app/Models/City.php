@@ -14,6 +14,7 @@ class City extends Model
         'province_id',
         'lat',
         'lng',
+        'bounding_box',
     ];
 
     public function province()
