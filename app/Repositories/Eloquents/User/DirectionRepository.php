@@ -18,5 +18,19 @@ class DirectionRepository extends BaseRepository implements DirectionRepositoryI
         return [];
     }
 
-    
+    public function createDirection($ride, $direction)
+    {
+        return $this->model->updateOrCreate(
+            [
+                'ride_id' => $ride['id']
+            ],
+            [
+                'name' => $direction['name'],
+                'route_index' => $direction['route_index'],
+                'coordinates' => serialize($direction['coordinates']),
+                'distance' => $direction['distance'],
+                'time' => $direction['time'],
+            ]
+        );
+    }
 }

@@ -31,7 +31,7 @@ class Ride
         'end_time',
         'price',
         'fee',
-        'status',
+        'status', // pending => 0, active => 1, canceled => 2
     ];
 
 
@@ -54,6 +54,12 @@ class Ride
     public function destination()
     {
         return $this->belongsTo(City::class, 'destination_city_id', 'id');
+    }
+
+
+    public function userVehicle()
+    {
+        return $this->belongsTo(UserVehicle::class, 'user_vehicle_id', 'id');
     }
 
 

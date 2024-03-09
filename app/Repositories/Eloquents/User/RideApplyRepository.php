@@ -6,6 +6,8 @@ use App\Models\RideApply;
 use App\Repositories\Eloquents\BaseRepository;
 use App\Repositories\Interfaces\User\RideApplyRepositoryInterface;
 
+use function PHPUnit\Framework\returnSelf;
+
 class RideApplyRepository extends BaseRepository implements RideApplyRepositoryInterface
 {
     public function __construct(RideApply $model)
@@ -48,6 +50,18 @@ class RideApplyRepository extends BaseRepository implements RideApplyRepositoryI
 
         return $applies;
         
+    }
+
+
+    public function cancelRideUpdate($applies)
+    {
+        foreach($applies as $apply){
+            $apply->update([
+                'status' => config('setting.ride_apply_status.ride_canceled')
+            ]);
+        }
+
+        return true;
     }
 
 

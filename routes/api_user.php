@@ -81,6 +81,11 @@ Route::middleware('auth:sanctum')->group(function () {
 // ----------------- Ride Route ------------------------
     Route::controller('RideController')->prefix('rides')->group(function(){
         Route::get('/my-rides', 'getMyRides');
+        Route::post('/', 'createRide');
+        Route::get('/{ride}', 'showRide');
+        Route::put('/{ride}', 'updateRide');
+        // Route::post('/{ride}/duplicate', 'duplicateRide');
+        Route::put('/{ride}/cancel', 'cancelRide');
         
     });
 

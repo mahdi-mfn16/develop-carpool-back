@@ -26,6 +26,14 @@ return [
         'canceled' => 3,
         'accept_closed' => 4,
         'reject_closed' => 5,
+        'ride_canceled' => 6,
+    ],
+
+
+    'ride_status' => [
+        'deactive' => 0, 
+        'active' => 1, 
+        'canceled' => 2
     ],
 
 

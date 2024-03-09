@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
+
 class Helper
 {
     public static function generateSmsCode()
@@ -25,6 +28,22 @@ class Helper
             $chatUniqueId .= $characters[rand(0, $charactersLength - 1)];
         }
         return $chatUniqueId;
+    }
+
+
+    public static function getLastDurationTime($startTime, $duration)
+    {
+        // $startTime = '20:30';
+        // $duration = '02:05';
+        // $endTime = '22:35';
+
+        $startTime = Carbon::createFromFormat('H:i', $startTime); // date is today
+        $parts = explode(':',$duration);
+
+        $newTime = $startTime->copy();
+        $endTime = $newTime->addHours(intval($parts[0]))->addMinutes(intval($parts[1]));  // date is today
+
+        return $endTime->format('H:i');
     }
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Ride;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RideStoreRequest extends FormRequest
+class RideDuplicateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

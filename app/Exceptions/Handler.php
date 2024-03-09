@@ -5,16 +5,18 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
-use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Laravel\Passport\Exceptions\OAuthServerException as ExceptionsOAuthServerException;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Shetabit\Multipay\Exceptions\PurchaseFailedException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Http\Request;
+
 
 
 class Handler extends ExceptionHandler
@@ -46,10 +48,9 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $th) {
-            // info('test1111');
-            // if ($request->is('api/*')) {
-
+        $this->renderable(function (Throwable $th, Request $request) {
+            if ($request->is('api/*')) {
+                Log::error($th);
                 if ($th instanceof ValidationException) {
                     // info('test1111');
                     return (new Controller())->errorResponse(
@@ -85,13 +86,12 @@ class Handler extends ExceptionHandler
                 }
 
 
-
                 return (new Controller())->errorResponse(
                     [], 500, $th->getMessage()
                 );
-            }
+                }
 
-        // }
+        }
     );
     }
       

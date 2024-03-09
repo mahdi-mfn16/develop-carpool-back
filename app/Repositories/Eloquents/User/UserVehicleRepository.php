@@ -78,6 +78,18 @@ class UserVehicleRepository extends BaseRepository implements UserVehicleReposit
     }
 
 
+
+    public function checkRideUserVehicle($userVehicleId)
+    {
+        $vehicle = $this->model->where('id', $userVehicleId)
+        ->where('user_id', auth('sanctum')->id())
+        ->where('status', config('setting.user_vehicle_status.accepted'))
+        ->first();
+
+        return $vehicle ? true : false;
+    }
+
+
     
 
     
