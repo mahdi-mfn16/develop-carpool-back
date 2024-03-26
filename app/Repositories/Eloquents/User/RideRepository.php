@@ -183,6 +183,23 @@ class RideRepository extends BaseRepository implements RideRepositoryInterface
     }
 
 
+    public function duplicateRide($request, $ride)
+    {
+        $direction = $ride->direction;
+        $endTime = Helper::getLastDurationTime($request->input('start_time'), $direction['time']);
+ 
+        $data = $ride->toArray();
+        $data['booked'] = 0;
+        $data['start_time'] = $request->input('start_time');
+        $data['end_time'] = $endTime;
+        $data['date'] = $request->input('date');
+        $data['price'] = $request->input('price');
+        
+        return $this->model->create($data);
+
+    }
+
+
     public function cancelRide($ride)
     {
         return $ride->update([

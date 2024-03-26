@@ -139,6 +139,27 @@ class RideService extends BaseService
 
 
 
+    public function duplicateRide($request, $ride)
+    {
+        $this->checkSameRideExist($request);
+
+        try {
+
+            DB::beginTransaction();
+            $newRide = $this->repository->duplicateRide($request, $ride);
+            $direction = $this->directionRepo->duplicateDirection($newRide, $ride);
+            DB::commit();
+            return $this->showItem($newRide['id']);
+        
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
+
     public function cancelRide($ride)
     {
         $this->repository->cancelRide($ride);

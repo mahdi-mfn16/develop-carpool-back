@@ -84,7 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'createRide');
         Route::get('/{ride}', 'showRide');
         Route::put('/{ride}', 'updateRide');
-        // Route::post('/{ride}/duplicate', 'duplicateRide');
+        Route::post('/{ride}/duplicate', 'duplicateRide');
         Route::put('/{ride}/cancel', 'cancelRide');
         
     });

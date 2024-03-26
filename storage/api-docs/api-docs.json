@@ -4035,7 +4035,7 @@
                                             },
                                             "distance": {
                                                 "description": "distance",
-                                                "example": "22.5"
+                                                "example": "22.5km"
                                             },
                                             "time": {
                                                 "description": "time",
@@ -4078,6 +4078,304 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/rides/{rideId}": {
+            "get": {
+                "tags": [
+                    "Ride"
+                ],
+                "summary": "show one ride",
+                "description": "show one ride",
+                "operationId": "showRide",
+                "parameters": [
+                    {
+                        "name": "rideId",
+                        "in": "path",
+                        "description": "ride id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Ride"
+                ],
+                "summary": "update one ride",
+                "description": "update one ride",
+                "operationId": "updateRide",
+                "parameters": [
+                    {
+                        "name": "rideId",
+                        "in": "path",
+                        "description": "ride id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "origin": {
+                                        "description": "origin",
+                                        "properties": {
+                                            "city_id": {
+                                                "description": "city_id",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "description": "name",
+                                                "example": "test"
+                                            },
+                                            "lat": {
+                                                "description": "lat",
+                                                "example": "22.3"
+                                            },
+                                            "lng": {
+                                                "description": "lng",
+                                                "example": "22.5"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "destination": {
+                                        "description": "destination",
+                                        "properties": {
+                                            "city_id": {
+                                                "description": "city_id",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "description": "name",
+                                                "example": "test"
+                                            },
+                                            "lat": {
+                                                "description": "lat",
+                                                "example": "22.3"
+                                            },
+                                            "lng": {
+                                                "description": "lng",
+                                                "example": "22.5"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "direction": {
+                                        "description": "direction",
+                                        "properties": {
+                                            "coordinates": {
+                                                "description": "coordinates",
+                                                "example": "[]"
+                                            },
+                                            "name": {
+                                                "description": "name",
+                                                "example": "test"
+                                            },
+                                            "route_index": {
+                                                "description": "route_index",
+                                                "example": "1"
+                                            },
+                                            "distance": {
+                                                "description": "distance",
+                                                "example": "22.5km"
+                                            },
+                                            "time": {
+                                                "description": "time",
+                                                "example": "20:30"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": {
+                                        "description": "type",
+                                        "example": "rider,passenger"
+                                    },
+                                    "date": {
+                                        "description": "date",
+                                        "example": "2024-04-01"
+                                    },
+                                    "start_time": {
+                                        "description": "start_time",
+                                        "example": "13:20"
+                                    },
+                                    "user_vehicle_id": {
+                                        "description": "user_vehicle_id",
+                                        "example": "1"
+                                    },
+                                    "capacity": {
+                                        "description": "capacity",
+                                        "example": "3"
+                                    },
+                                    "price": {
+                                        "description": "price",
+                                        "example": "21.0"
+                                    },
+                                    "description": {
+                                        "description": "description",
+                                        "example": "test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/rides/{rideId}/duplicate": {
+            "post": {
+                "tags": [
+                    "Ride"
+                ],
+                "summary": "duplicate one ride",
+                "description": "duplicate one ride",
+                "operationId": "duplicateRide",
+                "parameters": [
+                    {
+                        "name": "rideId",
+                        "in": "path",
+                        "description": "ride id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "date": {
+                                        "description": "date",
+                                        "example": "2024-04-01"
+                                    },
+                                    "start_time": {
+                                        "description": "start_time",
+                                        "example": "13:20"
+                                    },
+                                    "price": {
+                                        "description": "price",
+                                        "example": "21.0"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/rides/{rideId}/cancel": {
+            "put": {
+                "tags": [
+                    "Ride"
+                ],
+                "summary": "cancel one ride",
+                "description": "cancel one ride",
+                "operationId": "cancelRide",
+                "parameters": [
+                    {
+                        "name": "rideId",
+                        "in": "path",
+                        "description": "ride id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",

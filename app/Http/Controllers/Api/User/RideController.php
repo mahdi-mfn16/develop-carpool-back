@@ -344,13 +344,10 @@ class RideController extends Controller
      */
     public function duplicateRide(RideDuplicateRequest $request, Ride $ride)
     {    
-        
-        // time()
-        // date()
-        // Price 
-        // Gate::authorize('update', $ride);
-        // $ride = $this->rideService->cancelRide($ride);
-        // return $this->successJsonResponse(RideResource::make($ride));
+
+        Gate::authorize('update', $ride);
+        $ride = $this->rideService->duplicateRide($request, $ride);
+        return $this->successJsonResponse(RideResource::make($ride));
     }
 
 

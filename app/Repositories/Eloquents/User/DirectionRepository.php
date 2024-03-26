@@ -33,4 +33,22 @@ class DirectionRepository extends BaseRepository implements DirectionRepositoryI
             ]
         );
     }
+
+
+    public function duplicateDirection($newRide, $ride)
+    {
+        $direction = $ride->direction;
+        return $this->model->updateOrCreate(
+            [
+                'ride_id' => $newRide['id']
+            ],
+            [
+                'name' => $ride['name'],
+                'route_index' => $direction['route_index'],
+                'coordinates' => $direction['coordinates'],
+                'distance' => $direction['distance'],
+                'time' => $direction['time'],
+            ]
+        );
+    }
 }
